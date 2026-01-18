@@ -93,8 +93,11 @@ class BonusController extends Controller
             'max_bet' => ['nullable', 'string', 'max:255'],
             'wager' => ['nullable', 'string', 'max:255'],
             'free_spins' => ['nullable', 'string', 'max:255'],
+            'cta_label' => ['nullable', 'string', 'max:255'],
             'play_url' => ['nullable', 'url'],
             'terms_url' => ['nullable', 'url'],
+            'back_text' => ['nullable', 'string'],
+            'payment_methods' => ['nullable', 'string'],
             'sort_order' => ['nullable', 'integer'],
         ]);
     }

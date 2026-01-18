@@ -37,18 +37,32 @@
         <label>Wager</label>
         <input type="text" name="wager" value="{{ old('wager', $bonus->wager ?? '') }}">
     </div>
+<div class="form-group">
+    <label>Free Spins</label>
+    <input type="text" name="free_spins" value="{{ old('free_spins', $bonus->free_spins ?? '') }}">
+</div>
+</div>
+<div class="grid grid-3">
     <div class="form-group">
-        <label>Free Spins</label>
-        <input type="text" name="free_spins" value="{{ old('free_spins', $bonus->free_spins ?? '') }}">
+        <label>CTA Button Label</label>
+        <input type="text" name="cta_label" value="{{ old('cta_label', $bonus->cta_label ?? '') }}" placeholder="Claim Bonus">
+    </div>
+    <div class="form-group">
+        <label>Play URL</label>
+        <input type="url" name="play_url" value="{{ old('play_url', $bonus->play_url ?? '') }}">
+    </div>
+    <div class="form-group">
+        <label>Terms URL</label>
+        <input type="url" name="terms_url" value="{{ old('terms_url', $bonus->terms_url ?? '') }}">
     </div>
 </div>
 <div class="form-group">
-    <label>Play URL</label>
-    <input type="url" name="play_url" value="{{ old('play_url', $bonus->play_url ?? '') }}">
+    <label>Back Side Text</label>
+    <textarea name="back_text" rows="3" placeholder="Extra details shown on the back of the card.">{{ old('back_text', $bonus->back_text ?? '') }}</textarea>
 </div>
 <div class="form-group">
-    <label>Terms URL</label>
-    <input type="url" name="terms_url" value="{{ old('terms_url', $bonus->terms_url ?? '') }}">
+    <label>Payment Methods (comma-separated)</label>
+    <input type="text" name="payment_methods" value="{{ old('payment_methods', $bonus->payment_methods ?? '') }}" placeholder="Visa, MasterCard, PayPal">
 </div>
 <div class="grid grid-3">
     <div class="form-group">
