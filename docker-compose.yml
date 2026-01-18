@@ -48,6 +48,7 @@ services:
     depends_on:
       - db
 
+<<<<<<< HEAD
   scheduler:
     build:
       context: ./docker/php
@@ -72,6 +73,8 @@ services:
     depends_on:
       - db
 
+=======
+>>>>>>> origin/main
   db:
     image: postgres:16-alpine
     environment:

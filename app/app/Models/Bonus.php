@@ -22,11 +22,16 @@ class Bonus extends Model
         'max_bet',
         'wager',
         'free_spins',
+<<<<<<< HEAD
         'cta_label',
         'play_url',
         'terms_url',
         'back_text',
         'payment_methods',
+=======
+        'play_url',
+        'terms_url',
+>>>>>>> origin/main
         'is_active',
         'is_featured',
         'sort_order',

@@ -4,7 +4,10 @@
 <div class="grid grid-3">
     <div class="card">
         <h2>Create Filter Group</h2>
+<<<<<<< HEAD
         <p>Groups appear on the homepage filter bar.</p>
+=======
+>>>>>>> origin/main
         <form method="POST" action="{{ route('admin.filters.groups.store') }}">
             @csrf
             <div class="form-group">
@@ -24,7 +27,10 @@
 
     <div class="card">
         <h2>Create Filter Option</h2>
+<<<<<<< HEAD
         <p>Options belong to a group and can be assigned to bonuses.</p>
+=======
+>>>>>>> origin/main
         <form method="POST" action="{{ route('admin.filters.options.store') }}">
             @csrf
             <div class="form-group">

@@ -6,7 +6,10 @@
         <h1>Bonuses</h1>
         <a class="btn" href="{{ route('admin.bonuses.create') }}">New Bonus</a>
     </div>
+<<<<<<< HEAD
     <p>Manage bonus listings shown on the homepage.</p>
+=======
+>>>>>>> origin/main
     <table class="table">
         <thead>
         <tr>

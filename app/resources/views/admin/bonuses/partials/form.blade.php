@@ -37,6 +37,7 @@
         <label>Wager</label>
         <input type="text" name="wager" value="{{ old('wager', $bonus->wager ?? '') }}">
     </div>
+<<<<<<< HEAD
 <div class="form-group">
     <label>Free Spins</label>
     <input type="text" name="free_spins" value="{{ old('free_spins', $bonus->free_spins ?? '') }}">
@@ -63,6 +64,20 @@
 <div class="form-group">
     <label>Payment Methods (comma-separated)</label>
     <input type="text" name="payment_methods" value="{{ old('payment_methods', $bonus->payment_methods ?? '') }}" placeholder="Visa, MasterCard, PayPal">
+=======
+    <div class="form-group">
+        <label>Free Spins</label>
+        <input type="text" name="free_spins" value="{{ old('free_spins', $bonus->free_spins ?? '') }}">
+    </div>
+</div>
+<div class="form-group">
+    <label>Play URL</label>
+    <input type="url" name="play_url" value="{{ old('play_url', $bonus->play_url ?? '') }}">
+</div>
+<div class="form-group">
+    <label>Terms URL</label>
+    <input type="url" name="terms_url" value="{{ old('terms_url', $bonus->terms_url ?? '') }}">
+>>>>>>> origin/main
 </div>
 <div class="grid grid-3">
     <div class="form-group">

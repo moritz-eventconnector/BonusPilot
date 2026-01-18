@@ -13,6 +13,7 @@
         * { box-sizing: border-box; }
         body {
             margin: 0;
+<<<<<<< HEAD
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--brand-bg);
             color: #e5e7eb;
@@ -21,6 +22,16 @@
         header {
             background: #0f172a;
             border-bottom: 1px solid #1f2937;
+=======
+            font-family: Arial, sans-serif;
+            background: var(--brand-bg);
+            color: #111827;
+        }
+        a { color: var(--brand-primary); text-decoration: none; }
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+>>>>>>> origin/main
             padding: 16px 24px;
             display: flex;
             align-items: center;
@@ -31,14 +42,21 @@
             align-items: center;
             gap: 12px;
             font-weight: bold;
+<<<<<<< HEAD
             color: #f8fafc;
+=======
+            color: var(--brand-secondary);
+>>>>>>> origin/main
         }
         .logo img {
             height: 40px;
         }
         nav a {
             margin-left: 16px;
+<<<<<<< HEAD
             color: #e2e8f0;
+=======
+>>>>>>> origin/main
         }
         .container {
             max-width: 1100px;
@@ -46,12 +64,20 @@
             padding: 24px;
         }
         .card {
+<<<<<<< HEAD
             background: #0b1220;
             border-radius: 12px;
             border: 1px solid #1f2937;
             padding: 16px;
             margin-bottom: 16px;
             color: #e2e8f0;
+=======
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 16px;
+            margin-bottom: 16px;
+>>>>>>> origin/main
         }
         .btn {
             display: inline-block;
@@ -61,11 +87,15 @@
             border-radius: 6px;
             border: none;
             cursor: pointer;
+<<<<<<< HEAD
             font-weight: 600;
+=======
+>>>>>>> origin/main
         }
         .btn-secondary {
             background: #6b7280;
         }
+<<<<<<< HEAD
         .btn-outline {
             background: transparent;
             border: 1px solid var(--brand-primary);
@@ -78,6 +108,14 @@
             border-radius: 999px;
             font-size: 12px;
             color: #e2e8f0;
+=======
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            font-size: 12px;
+>>>>>>> origin/main
         }
         .grid {
             display: grid;
@@ -97,16 +135,26 @@
         input, textarea, select {
             width: 100%;
             padding: 10px;
+<<<<<<< HEAD
             border: 1px solid #374151;
             border-radius: 6px;
             background: #111827;
             color: #e5e7eb;
+=======
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+>>>>>>> origin/main
         }
         footer {
             margin-top: 40px;
             padding: 24px;
+<<<<<<< HEAD
             background: #0f172a;
             border-top: 1px solid #1f2937;
+=======
+            background: #fff;
+            border-top: 1px solid #e5e7eb;
+>>>>>>> origin/main
         }
         .filters {
             display: flex;
@@ -115,8 +163,13 @@
         }
         .filter-group {
             padding: 12px;
+<<<<<<< HEAD
             background: #0b1220;
             border: 1px solid #1f2937;
+=======
+            background: #fff;
+            border: 1px solid #e5e7eb;
+>>>>>>> origin/main
             border-radius: 8px;
         }
         .table {
@@ -124,12 +177,17 @@
             border-collapse: collapse;
         }
         .table th, .table td {
+<<<<<<< HEAD
             border-bottom: 1px solid #1f2937;
+=======
+            border-bottom: 1px solid #e5e7eb;
+>>>>>>> origin/main
             padding: 10px;
             text-align: left;
         }
         .alert {
             padding: 12px;
+<<<<<<< HEAD
             background: #0f766e;
             border: 1px solid #0f766e;
             border-radius: 6px;
@@ -203,6 +261,12 @@
             background: #111827;
             border: 1px solid #1f2937;
             font-size: 12px;
+=======
+            background: #ecfeff;
+            border: 1px solid #cffafe;
+            border-radius: 6px;
+            margin-bottom: 16px;
+>>>>>>> origin/main
         }
         @media (max-width: 768px) {
             nav a {
@@ -235,6 +299,7 @@
     </nav>
 </header>
 
+<<<<<<< HEAD
 @auth
     @if(auth()->user()->is_admin)
         <div style="background:#111827;color:#fff;">
@@ -249,6 +314,8 @@
     @endif
 @endauth
 
+=======
+>>>>>>> origin/main
 <main class="container">
     @if(session('status'))
         <div class="alert">{{ session('status') }}</div>

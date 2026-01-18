@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\BonusController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\BackupController;
+=======
+>>>>>>> origin/main
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -32,8 +35,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
+<<<<<<< HEAD
 
     Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
     Route::post('backups', [BackupController::class, 'store'])->name('backups.store');
     Route::post('backups/restore', [BackupController::class, 'restore'])->name('backups.restore');
+=======
+>>>>>>> origin/main
 });

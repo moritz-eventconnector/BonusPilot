@@ -8,7 +8,10 @@ RUN apk add --no-cache \
     icu-dev \
     oniguruma-dev \
     postgresql-dev \
+<<<<<<< HEAD
     postgresql-client \
+=======
+>>>>>>> origin/main
     zip \
     unzip
 

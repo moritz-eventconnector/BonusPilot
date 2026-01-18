@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="hero">
     <h1>Top Casino Bonuses</h1>
     <p>Explore featured offers and filter by bonus type. Click ⓘ for more details.</p>
 </div>
 
 <form method="GET" action="{{ route('home') }}" class="filters" style="margin-bottom:24px;">
+=======
+<h1>Bonuses</h1>
+
+<form method="GET" action="{{ route('home') }}" class="filters">
+>>>>>>> origin/main
     @foreach($groups as $group)
         <div class="filter-group">
             <strong>{{ $group->name }}</strong>
@@ -24,6 +30,7 @@
     </div>
 </form>
 
+<<<<<<< HEAD
 <div class="bonus-grid">
     @forelse($bonuses as $bonus)
         @php
@@ -81,12 +88,28 @@
                         @endif
                     </div>
                 </div>
+=======
+<div class="grid grid-3" style="margin-top:24px;">
+    @forelse($bonuses as $bonus)
+        <div class="card">
+            <h3>{{ $bonus->title }}</h3>
+            <p>{{ $bonus->short_text }}</p>
+            @if($bonus->bonus_percent)
+                <p><strong>{{ $bonus->bonus_percent }}%</strong> bonus</p>
+            @endif
+            @if($bonus->is_featured)
+                <span class="badge">Featured</span>
+            @endif
+            <div style="margin-top:12px;">
+                <a class="btn" href="{{ route('bonus.show', $bonus->slug) }}">View Bonus</a>
+>>>>>>> origin/main
             </div>
         </div>
     @empty
         <p>No bonuses found.</p>
     @endforelse
 </div>
+<<<<<<< HEAD
 
 <script>
     const cards = document.querySelectorAll('[data-card]');
@@ -120,4 +143,6 @@
         }
     });
 </script>
+=======
+>>>>>>> origin/main
 @endsection

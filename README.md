@@ -29,7 +29,10 @@ sudo ./scripts/update.sh
 ## Admin usage
 - Log in at `/login`.
 - Manage bonuses, filters, pages, and settings from `/admin`.
+<<<<<<< HEAD
 - Create or restore backups from **Admin → Backups**.
+=======
+>>>>>>> origin/main
 
 ## Branding
 Update branding from **Admin → Settings**:
@@ -40,4 +43,7 @@ Update branding from **Admin → Settings**:
 ## Notes
 - Caddy handles HTTPS and proxies to Nginx.
 - App is served by PHP-FPM in the `app` container.
+<<<<<<< HEAD
 - Weekly backups run automatically with a 4-week retention policy.
+=======
+>>>>>>> origin/main

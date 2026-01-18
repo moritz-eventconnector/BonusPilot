@@ -6,7 +6,10 @@
         <h1>Pages</h1>
         <a class="btn" href="{{ route('admin.pages.create') }}">New Page</a>
     </div>
+<<<<<<< HEAD
     <p>Publish informational pages shown under /p/{slug}.</p>
+=======
+>>>>>>> origin/main
     <table class="table">
         <thead>
         <tr>

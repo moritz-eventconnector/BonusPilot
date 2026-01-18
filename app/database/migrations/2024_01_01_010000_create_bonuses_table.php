@@ -21,11 +21,16 @@ return new class extends Migration
             $table->string('max_bet')->nullable();
             $table->string('wager')->nullable();
             $table->string('free_spins')->nullable();
+<<<<<<< HEAD
             $table->string('cta_label')->nullable();
             $table->text('play_url')->nullable();
             $table->text('terms_url')->nullable();
             $table->text('back_text')->nullable();
             $table->text('payment_methods')->nullable();
+=======
+            $table->text('play_url')->nullable();
+            $table->text('terms_url')->nullable();
+>>>>>>> origin/main
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->integer('sort_order')->default(0);
