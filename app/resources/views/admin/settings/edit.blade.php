@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label>Background Color</label>
-                <input type="text" name="background_color" value="{{ old('background_color', $settings->get('background_color')) }}" placeholder="#f9fafb">
+                <input type="text" name="background_color" value="{{ old('background_color', $settings->get('background_color')) }}" placeholder="#0b345c">
             </div>
             <div class="form-group">
                 <label>Background Image (optional)</label>
