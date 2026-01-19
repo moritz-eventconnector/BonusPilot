@@ -216,8 +216,8 @@
             color: #f8fafc;
         }
         .bonus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 18px;
         }
         .flip-card {
@@ -256,6 +256,24 @@
             align-items: flex-start;
             gap: 12px;
         }
+        .bonus-back-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
+            gap: 20px;
+            height: 100%;
+        }
+        .bonus-back-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+        .bonus-back-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
         .bonus-row {
             display: grid;
             grid-template-columns: 1.2fr repeat(3, minmax(110px, 1fr)) auto;
@@ -284,6 +302,15 @@
             flex-wrap: wrap;
             justify-content: flex-end;
         }
+        .bonus-actions-vertical {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .bonus-actions-vertical .btn {
+            width: 100%;
+            justify-content: center;
+        }
         .bonus-metric {
             text-align: center;
         }
@@ -305,6 +332,10 @@
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 8px;
+        }
+        .bonus-back-actions .payment-methods {
+            justify-content: flex-end;
+            margin-top: 0;
         }
         .payment-pill {
             padding: 6px 10px;
@@ -338,6 +369,15 @@
             }
             .bonus-metric {
                 text-align: left;
+            }
+            .bonus-back-layout {
+                grid-template-columns: 1fr;
+            }
+            .bonus-back-actions {
+                align-items: flex-start;
+            }
+            .bonus-back-actions .payment-methods {
+                justify-content: flex-start;
             }
         }
     </style>

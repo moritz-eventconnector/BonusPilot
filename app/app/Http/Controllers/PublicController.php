@@ -6,6 +6,8 @@ use App\Models\Bonus;
 use App\Models\FilterGroup;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\View\View;
 
 class PublicController extends Controller
@@ -56,5 +58,14 @@ class PublicController extends Controller
             ->firstOrFail();
 
         return view('public.page', compact('page'));
+    }
+
+    public function bonusIcon(Bonus $bonus): Response
+    {
+        if (!$bonus->bonus_icon_path || !Storage::disk('public')->exists($bonus->bonus_icon_path)) {
+            abort(404);
+        }
+
+        return Storage::disk('public')->response($bonus->bonus_icon_path);
     }
 }
