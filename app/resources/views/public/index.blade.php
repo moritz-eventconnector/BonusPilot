@@ -70,7 +70,9 @@
         <div class="flip-card" data-card>
             <div class="flip-card-inner">
                 <div class="flip-card-face">
-                    <span class="bonus-flame" aria-hidden="true">🔥</span>
+                    @if($bonus->is_featured)
+                        <span class="bonus-flame" aria-hidden="true">🔥</span>
+                    @endif
                     <div class="bonus-row">
                         <div class="bonus-brand">
                             @if($bonus->bonus_icon_path)
@@ -116,7 +118,9 @@
                     </div>
                 </div>
                 <div class="flip-card-face flip-card-back">
-                    <span class="bonus-flame" aria-hidden="true">🔥</span>
+                    @if($bonus->is_featured)
+                        <span class="bonus-flame" aria-hidden="true">🔥</span>
+                    @endif
                     <div class="bonus-back-layout">
                         <div class="bonus-back-details">
                             <div class="card-top">
