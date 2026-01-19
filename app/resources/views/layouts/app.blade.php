@@ -359,6 +359,21 @@
             width: 18px;
             height: 18px;
         }
+        .editor-columns {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            align-items: start;
+            margin: 12px 0;
+        }
+        .editor-column {
+            min-height: 60px;
+        }
+        .editor-column img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
         @media (max-width: 768px) {
             nav a {
                 margin-left: 8px;
@@ -386,6 +401,9 @@
             }
             .bonus-back-actions .payment-methods {
                 justify-content: flex-start;
+            }
+            .editor-columns {
+                grid-template-columns: 1fr;
             }
         }
     </style>

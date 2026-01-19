@@ -19,6 +19,7 @@
             <button class="btn btn-outline" type="button" data-command="insertUnorderedList">List</button>
             <button class="btn btn-outline" type="button" data-command="insertOrderedList">Numbered</button>
             <button class="btn btn-outline" type="button" data-command="createLink">Link</button>
+            <button class="btn btn-outline" type="button" data-command="insertColumns">2 Spalten</button>
             <button class="btn btn-secondary" type="button" data-command="removeFormat">Clear</button>
         </div>
         <div class="wysiwyg-editor" data-editor contenteditable="true" style="min-height:180px;padding:12px;border:1px solid #374151;border-radius:8px;background:#0f172a;color:#e5e7eb;">
@@ -55,6 +56,24 @@
                     if (url) {
                         document.execCommand(command, false, url);
                     }
+                    return;
+                }
+                if (command === 'insertColumns') {
+                    const columnsMarkup = `
+                        <div class="editor-columns">
+                            <div class="editor-column">
+                                <p><strong>Bildbereich</strong></p>
+                                <p>Füge hier ein Bild ein.</p>
+                            </div>
+                            <div class="editor-column">
+                                <p><strong>Textbereich</strong></p>
+                                <p>Schreibe hier deinen Text.</p>
+                            </div>
+                        </div>
+                    `;
+                    document.execCommand('insertHTML', false, columnsMarkup);
+                    editor.focus();
+                    syncEditor();
                     return;
                 }
                 document.execCommand(command, false, null);
