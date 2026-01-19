@@ -78,7 +78,7 @@
                         <div class="bonus-actions">
                             @if($bonus->play_url)
                                 <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                    {{ $bonus->cta_label ?: 'Play now' }}
+                                    Play now
                                 </a>
                             @else
                                 <span class="badge">No link yet</span>
@@ -115,7 +115,7 @@
                             <div class="bonus-actions bonus-actions-vertical">
                                 @if($bonus->play_url)
                                     <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                        {{ $bonus->cta_label ?: 'Play now' }}
+                                        Play now
                                     </a>
                                 @endif
                                 <button class="btn btn-secondary" type="button" data-flip>Go Back</button>
