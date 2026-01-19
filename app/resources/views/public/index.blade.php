@@ -50,7 +50,7 @@
                     <div class="bonus-row">
                         <div class="bonus-brand">
                             @if($bonus->bonus_icon_path)
-                                <img class="bonus-logo" src="{{ asset('storage/' . $bonus->bonus_icon_path) }}" alt="{{ $bonus->title }}">
+                                <img class="bonus-logo" src="{{ route('bonus.icon', $bonus) }}" alt="{{ $bonus->title }}">
                             @else
                                 <h3>{{ $bonus->title }}</h3>
                             @endif
@@ -88,35 +88,39 @@
                     </div>
                 </div>
                 <div class="flip-card-face flip-card-back">
-                    <div>
-                        <div class="card-top">
-                            <h3>Information</h3>
-                            <button class="info-btn" type="button" data-flip aria-label="Back">⟲</button>
-                        </div>
-                        <p>{{ $bonus->back_text ?: 'Keine weiteren Details vorhanden.' }}</p>
-                        @if(count($methods))
-                            <div class="payment-methods">
-                                @foreach($methods as $method)
-                                    @php
-                                        $icon = $paymentIcons[$normalizeMethod($method)] ?? null;
-                                    @endphp
-                                    <span class="payment-pill">
-                                        @if($icon)
-                                            <span class="payment-icon">{!! $icon !!}</span>
-                                        @endif
-                                        <span>{{ $method }}</span>
-                                    </span>
-                                @endforeach
+                    <div class="bonus-back-layout">
+                        <div class="bonus-back-details">
+                            <div class="card-top">
+                                <h3>Information</h3>
                             </div>
-                        @endif
-                    </div>
-                    <div class="bonus-actions">
-                        @if($bonus->play_url)
-                            <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                {{ $bonus->cta_label ?: 'Play now' }}
-                            </a>
-                        @endif
-                        <button class="btn btn-secondary" type="button" data-flip>Go Back</button>
+                            <p>{{ $bonus->back_text ?: 'Keine weiteren Details vorhanden.' }}</p>
+                        </div>
+                        <div class="bonus-back-actions">
+                            <button class="info-btn" type="button" data-flip aria-label="Back">⟲</button>
+                            @if(count($methods))
+                                <div class="payment-methods">
+                                    @foreach($methods as $method)
+                                        @php
+                                            $icon = $paymentIcons[$normalizeMethod($method)] ?? null;
+                                        @endphp
+                                        <span class="payment-pill">
+                                            @if($icon)
+                                                <span class="payment-icon">{!! $icon !!}</span>
+                                            @endif
+                                            <span>{{ $method }}</span>
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <div class="bonus-actions bonus-actions-vertical">
+                                @if($bonus->play_url)
+                                    <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
+                                        {{ $bonus->cta_label ?: 'Play now' }}
+                                    </a>
+                                @endif
+                                <button class="btn btn-secondary" type="button" data-flip>Go Back</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
