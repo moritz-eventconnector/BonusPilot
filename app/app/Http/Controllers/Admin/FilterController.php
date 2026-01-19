@@ -39,6 +39,32 @@ class FilterController extends Controller
         return redirect()->route('admin.filters.index')->with('status', 'Filter group created.');
     }
 
+    public function updateGroup(Request $request, FilterGroup $group): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'sort_order' => ['nullable', 'integer'],
+        ]);
+
+        $data['slug'] = Str::slug($data['name']);
+        $data['is_active'] = $request->boolean('is_active');
+
+        $request->validate([
+            'name' => ['required', Rule::unique('filter_groups', 'name')->ignore($group->id)],
+        ]);
+
+        $group->update($data);
+
+        return redirect()->route('admin.filters.index')->with('status', 'Filter group updated.');
+    }
+
+    public function destroyGroup(FilterGroup $group): RedirectResponse
+    {
+        $group->delete();
+
+        return redirect()->route('admin.filters.index')->with('status', 'Filter group deleted.');
+    }
+
     public function storeOption(Request $request): RedirectResponse
     {
         $data = $request->validate([
@@ -57,5 +83,32 @@ class FilterController extends Controller
         FilterOption::create($data);
 
         return redirect()->route('admin.filters.index')->with('status', 'Filter option created.');
+    }
+
+    public function updateOption(Request $request, FilterOption $option): RedirectResponse
+    {
+        $data = $request->validate([
+            'filter_group_id' => ['required', 'exists:filter_groups,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'sort_order' => ['nullable', 'integer'],
+        ]);
+
+        $data['slug'] = Str::slug($data['name']);
+        $data['is_active'] = $request->boolean('is_active');
+
+        $request->validate([
+            'name' => ['required', Rule::unique('filter_options', 'name')->ignore($option->id)],
+        ]);
+
+        $option->update($data);
+
+        return redirect()->route('admin.filters.index')->with('status', 'Filter option updated.');
+    }
+
+    public function destroyOption(FilterOption $option): RedirectResponse
+    {
+        $option->delete();
+
+        return redirect()->route('admin.filters.index')->with('status', 'Filter option deleted.');
     }
 }

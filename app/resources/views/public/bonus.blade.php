@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@php
+    $title = $bonus->title;
+@endphp
+
 @section('content')
 <div class="card">
     <h1>{{ $bonus->title }}</h1>

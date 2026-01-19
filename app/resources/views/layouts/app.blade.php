@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'BonusPilot' }}</title>
+    <title>{{ $title ?? $settings->get('site_title', $settings->get('site_name', 'BonusPilot')) }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if($settings->get('favicon_path'))
+        <link rel="icon" href="{{ asset('storage/' . $settings->get('favicon_path')) }}">
+    @endif
     <style>
         :root {
             --brand-primary: {{ $settings->get('primary_color', '#2563eb') }};
             --brand-secondary: {{ $settings->get('secondary_color', '#1f2937') }};
             --brand-bg: {{ $settings->get('background_color', '#f9fafb') }};
+            --brand-bg-image: {{ $settings->get('background_image_path') ? "url('" . asset('storage/' . $settings->get('background_image_path')) . "')" : 'none' }};
         }
         * { box-sizing: border-box; }
         body {
             margin: 0;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(180deg, #0a3d6f 0%, #0a6bb0 50%, #0a5e9b 100%);
+            background-color: var(--brand-bg);
+            background-image: var(--brand-bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: #e5e7eb;
             min-height: 100vh;
         }
@@ -397,7 +405,7 @@
         @if($settings->get('logo_path'))
             <img src="{{ asset('storage/' . $settings->get('logo_path')) }}" alt="Logo">
         @endif
-        <span>BonusPilot</span>
+        <span>{{ $settings->get('site_name', 'BonusPilot') }}</span>
     </div>
     <nav class="nav-links">
         <div>
@@ -448,7 +456,7 @@
 
 <footer>
     <div class="container">
-        <strong>BonusPilot</strong>
+        <strong>{{ $settings->get('site_name', 'BonusPilot') }}</strong>
         <div class="filters" style="margin-top:12px;">
             @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
                 @if($settings->get($social))
