@@ -59,10 +59,18 @@
     @forelse($bonuses as $bonus)
         @php
             $methods = array_filter(array_map('trim', explode(',', $bonus->payment_methods ?? '')));
+            $metricLabels = [
+                'bonus_percent' => $bonus->bonus_percent_label ?: 'Bonus',
+                'max_bonus' => $bonus->max_bonus_label ?: 'Maxbonus',
+                'max_bet' => $bonus->max_bet_label ?: 'Maxbet',
+                'wager' => $bonus->wager_label ?: 'Wager',
+            ];
+            $backLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $bonus->back_text ?? ''))));
         @endphp
         <div class="flip-card" data-card>
             <div class="flip-card-inner">
                 <div class="flip-card-face">
+                    <span class="bonus-flame" aria-hidden="true">🔥</span>
                     <div class="bonus-row">
                         <div class="bonus-brand">
                             @if($bonus->bonus_icon_path)
@@ -81,20 +89,24 @@
                         </div>
                         <div class="bonus-metric">
                             <strong>{{ $bonus->bonus_percent ? $bonus->bonus_percent . '%' : '—' }}</strong>
-                            <span>{{ $bonus->bonus_percent ? 'Bonus' : 'Bonus' }}</span>
+                            <span>{{ $metricLabels['bonus_percent'] }}</span>
                         </div>
                         <div class="bonus-metric">
                             <strong>{{ $bonus->max_bonus ?: '—' }}</strong>
-                            <span>Maxbonus</span>
+                            <span>{{ $metricLabels['max_bonus'] }}</span>
+                        </div>
+                        <div class="bonus-metric">
+                            <strong>{{ $bonus->max_bet ?: '—' }}</strong>
+                            <span>{{ $metricLabels['max_bet'] }}</span>
                         </div>
                         <div class="bonus-metric">
                             <strong>{{ $bonus->wager ?: '—' }}</strong>
-                            <span>Wager</span>
+                            <span>{{ $metricLabels['wager'] }}</span>
                         </div>
                         <div class="bonus-actions">
                             @if($bonus->play_url)
                                 <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                    Play now
+                                    {{ $bonus->cta_label ?: 'Play now' }}
                                 </a>
                             @else
                                 <span class="badge">No link yet</span>
@@ -104,34 +116,50 @@
                     </div>
                 </div>
                 <div class="flip-card-face flip-card-back">
+                    <span class="bonus-flame" aria-hidden="true">🔥</span>
                     <div class="bonus-back-layout">
                         <div class="bonus-back-details">
                             <div class="card-top">
                                 <h3>Information</h3>
                             </div>
-                            <p>{{ $bonus->back_text ?: 'Keine weiteren Details vorhanden.' }}</p>
+                            @if(count($backLines))
+                                <ul class="bonus-list">
+                                    @foreach($backLines as $line)
+                                        <li>{{ $line }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>Keine weiteren Details vorhanden.</p>
+                            @endif
                         </div>
                         <div class="bonus-back-actions">
                             <button class="info-btn" type="button" data-flip aria-label="Back">⟲</button>
                             @if(count($methods))
                                 <div class="payment-methods">
-                                    @foreach($methods as $method)
-                                        @php
-                                            $icon = $paymentIcons[$normalizeMethod($method)] ?? null;
-                                        @endphp
-                                        <span class="payment-pill">
-                                            @if($icon)
-                                                <span class="payment-icon">{!! $icon !!}</span>
-                                            @endif
-                                            <span>{{ $method }}</span>
-                                        </span>
-                                    @endforeach
+                                    <div class="payment-heading">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2 0v10h12V7z"/><path fill="currentColor" d="M6 10h6v2H6z"/></svg>
+                                        <span>Payments</span>
+                                    </div>
+                                    <div class="payment-list">
+                                        @foreach($methods as $method)
+                                            @php
+                                                $icon = $paymentIcons[$normalizeMethod($method)] ?? null;
+                                            @endphp
+                                            <span class="payment-chip" aria-label="{{ $method }}">
+                                                @if($icon)
+                                                    {!! $icon !!}
+                                                @else
+                                                    <span class="bonus-info-pill">{{ $method }}</span>
+                                                @endif
+                                            </span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             @endif
                             <div class="bonus-actions bonus-actions-vertical">
                                 @if($bonus->play_url)
                                     <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                        Play now
+                                        {{ $bonus->cta_label ?: 'Play now' }}
                                     </a>
                                 @endif
                                 <button class="btn btn-secondary" type="button" data-flip>Go Back</button>
