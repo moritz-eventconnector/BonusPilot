@@ -12,7 +12,7 @@
         :root {
             --brand-primary: {{ $settings->get('primary_color', '#2563eb') }};
             --brand-secondary: {{ $settings->get('secondary_color', '#1f2937') }};
-            --brand-bg: {{ $settings->get('background_color', '#f9fafb') }};
+            --brand-bg: {{ $settings->get('background_color', '#0b345c') }};
             --brand-bg-image: {{ $settings->get('background_image_path') ? "url('" . asset('storage/' . $settings->get('background_image_path')) . "')" : 'none' }};
         }
         * { box-sizing: border-box; }
