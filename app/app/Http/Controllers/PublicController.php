@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Bonus;
+use App\Models\FilterGroup;
+use App\Models\Page;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class PublicController extends Controller
+{
+    public function index(Request $request): View
+    {
+        $filterSlug = $request->input('filter');
+        $legacyFilters = $request->input('filters', []);
+        if (!$filterSlug && is_array($legacyFilters) && count($legacyFilters)) {
+            $filterSlug = $legacyFilters[0];
+        }
+
+        $groups = FilterGroup::with(['options' => function ($query) {
+            $query->where('is_active', true)->orderBy('sort_order');
+        }])
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        $bonuses = Bonus::with('filterOptions')
+            ->where('is_active', true)
+            ->when($filterSlug, function ($query) use ($filterSlug) {
+                $query->whereHas('filterOptions', function ($subQuery) use ($filterSlug) {
+                    $subQuery->where('slug', $filterSlug);
+                });
+            })
+            ->orderByDesc('is_featured')
+            ->orderBy('sort_order')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('public.index', compact('groups', 'bonuses', 'filterSlug'));
+    }
+
+    public function showBonus(string $slug): View
+    {
+        $bonus = Bonus::where('slug', $slug)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        return view('public.bonus', compact('bonus'));
+    }
+
+    public function showPage(string $slug): View
+    {
+        $page = Page::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        return view('public.page', compact('page'));
+    }
+}
