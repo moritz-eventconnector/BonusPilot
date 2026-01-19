@@ -3,6 +3,11 @@
     <input type="text" name="title" value="{{ old('title', $page->title ?? '') }}" required>
 </div>
 <div class="form-group">
+    <label>Slug</label>
+    <input type="text" name="slug" value="{{ old('slug', $page->slug ?? '') }}">
+    <p style="margin-top:8px;color:#94a3b8;">Leer lassen, um den Slug automatisch aus dem Titel zu erzeugen.</p>
+</div>
+<div class="form-group">
     <label>Status</label>
     <select name="status">
         <option value="draft" {{ old('status', $page->status ?? 'draft') === 'draft' ? 'selected' : '' }}>Draft</option>

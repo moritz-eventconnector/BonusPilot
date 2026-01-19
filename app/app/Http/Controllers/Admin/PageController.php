@@ -27,10 +27,11 @@ class PageController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validateData($request);
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = Str::slug($data['slug'] ?: $data['title']);
 
         $request->validate([
             'title' => ['required', Rule::unique('pages', 'title')],
+            'slug' => ['nullable', Rule::unique('pages', 'slug')],
         ]);
 
         Page::create($data);
@@ -46,10 +47,11 @@ class PageController extends Controller
     public function update(Request $request, Page $page): RedirectResponse
     {
         $data = $this->validateData($request);
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = Str::slug($data['slug'] ?: $data['title']);
 
         $request->validate([
             'title' => ['required', Rule::unique('pages', 'title')->ignore($page->id)],
+            'slug' => ['nullable', Rule::unique('pages', 'slug')->ignore($page->id)],
         ]);
 
         $page->update($data);
@@ -68,6 +70,7 @@ class PageController extends Controller
     {
         return $request->validate([
             'title' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'content' => ['required', 'string'],
             'seo_title' => ['nullable', 'string', 'max:255'],
