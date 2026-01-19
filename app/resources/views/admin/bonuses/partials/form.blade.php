@@ -1,17 +1,17 @@
 <div class="form-group">
-    <label>Title</label>
+    <label>Bonus Title</label>
     <input type="text" name="title" value="{{ old('title', $bonus->title ?? '') }}" required>
 </div>
 <div class="form-group">
-    <label>Casino Name</label>
+    <label>Casino/Brand Name</label>
     <input type="text" name="casino_name" value="{{ old('casino_name', $bonus->casino_name ?? '') }}">
 </div>
 <div class="form-group">
-    <label>Short Text</label>
+    <label>Short Teaser</label>
     <input type="text" name="short_text" value="{{ old('short_text', $bonus->short_text ?? '') }}">
 </div>
 <div class="form-group">
-    <label>Content</label>
+    <label>Long Description</label>
     <textarea name="content" rows="4">{{ old('content', $bonus->content ?? '') }}</textarea>
 </div>
 <div class="grid grid-3">
@@ -24,17 +24,17 @@
         <input type="text" name="bonus_code_label" value="{{ old('bonus_code_label', $bonus->bonus_code_label ?? '') }}" placeholder="Code">
     </div>
     <div class="form-group">
-        <label>Bonus Percent</label>
+        <label>Bonus Percentage</label>
         <input type="number" name="bonus_percent" value="{{ old('bonus_percent', $bonus->bonus_percent ?? '') }}">
     </div>
     <div class="form-group">
-        <label>Max Bonus</label>
+        <label>Max Bonus Amount</label>
         <input type="text" name="max_bonus" value="{{ old('max_bonus', $bonus->max_bonus ?? '') }}">
     </div>
 </div>
 <div class="grid grid-3">
     <div class="form-group">
-        <label>Bonus Percent Label</label>
+        <label>Bonus Percentage Label</label>
         <input type="text" name="bonus_percent_label" value="{{ old('bonus_percent_label', $bonus->bonus_percent_label ?? '') }}" placeholder="Bonus / Non-Sticky">
     </div>
     <div class="form-group">
@@ -43,11 +43,11 @@
     </div>
 </div>
 <div class="form-group">
-    <label>Bonus Icon (PNG/JPG/SVG)</label>
+    <label>Bonus Icon (shown on card)</label>
     <input type="file" name="bonus_icon" accept=".png,.jpg,.jpeg,.svg">
     @if(!empty($bonus?->bonus_icon_path))
         <div style="margin-top:8px;">
-            <img src="{{ asset('storage/' . $bonus->bonus_icon_path) }}" alt="Bonus icon" style="max-height:48px;">
+            <img src="{{ route('bonus.icon', $bonus) }}" alt="Bonus icon" style="max-height:48px;">
         </div>
     @endif
 </div>
@@ -57,7 +57,7 @@
         <input type="text" name="max_bet" value="{{ old('max_bet', $bonus->max_bet ?? '') }}">
     </div>
     <div class="form-group">
-        <label>Wager</label>
+        <label>Wagering Requirement</label>
         <input type="text" name="wager" value="{{ old('wager', $bonus->wager ?? '') }}">
     </div>
     <div class="form-group">
@@ -71,26 +71,26 @@
         <input type="text" name="max_bet_label" value="{{ old('max_bet_label', $bonus->max_bet_label ?? '') }}" placeholder="Maxbet">
     </div>
     <div class="form-group">
-        <label>Wager Label</label>
+        <label>Wager Label (B+D)</label>
         <input type="text" name="wager_label" value="{{ old('wager_label', $bonus->wager_label ?? '') }}" placeholder="Wager (B+D)">
     </div>
 </div>
 <div class="grid grid-3">
     <div class="form-group">
-        <label>CTA Button Label</label>
+        <label>CTA Button Text</label>
         <input type="text" name="cta_label" value="{{ old('cta_label', $bonus->cta_label ?? '') }}" placeholder="Claim Bonus">
     </div>
     <div class="form-group">
-        <label>Play URL</label>
+        <label>Play Link (URL)</label>
         <input type="url" name="play_url" value="{{ old('play_url', $bonus->play_url ?? '') }}">
     </div>
     <div class="form-group">
-        <label>Terms URL</label>
+        <label>Terms Link (URL)</label>
         <input type="url" name="terms_url" value="{{ old('terms_url', $bonus->terms_url ?? '') }}">
     </div>
 </div>
 <div class="form-group">
-    <label>Back Side Text</label>
+    <label>Back Side Bullet Points</label>
     <textarea name="back_text" rows="3" placeholder="Extra details shown on the back of the card.">{{ old('back_text', $bonus->back_text ?? '') }}</textarea>
 </div>
 <div class="form-group">
@@ -103,10 +103,10 @@
         <input type="number" name="sort_order" value="{{ old('sort_order', $bonus->sort_order ?? 0) }}">
     </div>
     <div class="form-group">
-        <label><input type="checkbox" name="is_active" value="1" {{ old('is_active', $bonus->is_active ?? true) ? 'checked' : '' }}> Active</label>
+        <label><input type="checkbox" name="is_active" value="1" {{ old('is_active', $bonus->is_active ?? true) ? 'checked' : '' }}> Visible on site</label>
     </div>
     <div class="form-group">
-        <label><input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $bonus->is_featured ?? false) ? 'checked' : '' }}> Featured</label>
+        <label><input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $bonus->is_featured ?? false) ? 'checked' : '' }}> Show flame badge</label>
     </div>
 </div>
 

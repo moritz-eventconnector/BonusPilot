@@ -245,14 +245,14 @@
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at top left, rgba(16,76,126,0.7), rgba(8,31,52,0.95) 55%) #0a2440;
-            border: 2px solid rgba(255,255,255,0.25);
+            border: 2px solid rgba(255,255,255,0.6);
             border-radius: 20px;
             padding: 22px 26px;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 12px 28px rgba(2,16,32,0.35);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 10px 24px rgba(2,16,32,0.3);
             overflow: hidden;
         }
         .flip-card-face::before {
@@ -260,7 +260,7 @@
             position: absolute;
             inset: 6px;
             border-radius: 16px;
-            border: 2px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
             pointer-events: none;
         }
         .bonus-flame {
@@ -346,7 +346,8 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            padding-left: 24px;
+            align-items: center;
+            text-align: center;
         }
         .bonus-logo {
             max-height: 56px;
