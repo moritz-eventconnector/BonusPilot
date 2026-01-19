@@ -28,7 +28,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('filters', [FilterController::class, 'index'])->name('filters.index');
     Route::post('filters/groups', [FilterController::class, 'storeGroup'])->name('filters.groups.store');
+    Route::patch('filters/groups/{group}', [FilterController::class, 'updateGroup'])->name('filters.groups.update');
+    Route::delete('filters/groups/{group}', [FilterController::class, 'destroyGroup'])->name('filters.groups.destroy');
     Route::post('filters/options', [FilterController::class, 'storeOption'])->name('filters.options.store');
+    Route::patch('filters/options/{option}', [FilterController::class, 'updateOption'])->name('filters.options.update');
+    Route::delete('filters/options/{option}', [FilterController::class, 'destroyOption'])->name('filters.options.destroy');
 
     Route::resource('pages', PageController::class)->except(['show']);
 
