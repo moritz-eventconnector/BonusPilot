@@ -32,6 +32,16 @@
         <input type="text" name="max_bonus" value="{{ old('max_bonus', $bonus->max_bonus ?? '') }}">
     </div>
 </div>
+<div class="grid grid-3">
+    <div class="form-group">
+        <label>Bonus Percent Label</label>
+        <input type="text" name="bonus_percent_label" value="{{ old('bonus_percent_label', $bonus->bonus_percent_label ?? '') }}" placeholder="Bonus / Non-Sticky">
+    </div>
+    <div class="form-group">
+        <label>Max Bonus Label</label>
+        <input type="text" name="max_bonus_label" value="{{ old('max_bonus_label', $bonus->max_bonus_label ?? '') }}" placeholder="Maxbonus">
+    </div>
+</div>
 <div class="form-group">
     <label>Bonus Icon (PNG/JPG/SVG)</label>
     <input type="file" name="bonus_icon" accept=".png,.jpg,.jpeg,.svg">
@@ -53,6 +63,16 @@
     <div class="form-group">
         <label>Free Spins</label>
         <input type="text" name="free_spins" value="{{ old('free_spins', $bonus->free_spins ?? '') }}">
+    </div>
+</div>
+<div class="grid grid-3">
+    <div class="form-group">
+        <label>Max Bet Label</label>
+        <input type="text" name="max_bet_label" value="{{ old('max_bet_label', $bonus->max_bet_label ?? '') }}" placeholder="Maxbet">
+    </div>
+    <div class="form-group">
+        <label>Wager Label</label>
+        <input type="text" name="wager_label" value="{{ old('wager_label', $bonus->wager_label ?? '') }}" placeholder="Wager (B+D)">
     </div>
 </div>
 <div class="grid grid-3">

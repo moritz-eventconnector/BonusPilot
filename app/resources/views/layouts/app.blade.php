@@ -244,16 +244,31 @@
         .flip-card-face {
             position: absolute;
             inset: 0;
-            background: #0b2a46;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 18px;
-            padding: 20px;
+            background: radial-gradient(circle at top left, rgba(16,76,126,0.7), rgba(8,31,52,0.95) 55%) #0a2440;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 22px 26px;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 12px 28px rgba(2,16,32,0.35);
             overflow: hidden;
+        }
+        .flip-card-face::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.15);
+            pointer-events: none;
+        }
+        .bonus-flame {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 22px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
         }
         .flip-card-back {
             transform: rotateY(180deg);
@@ -266,8 +281,8 @@
         }
         .bonus-back-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
-            gap: 20px;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+            gap: 26px;
             height: 100%;
         }
         .bonus-back-details {
@@ -275,6 +290,45 @@
             flex-direction: column;
             gap: 10px;
             text-align: left;
+        }
+        .bonus-back-details h3 {
+            color: #4fb0ff;
+            font-size: 20px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bonus-back-details h3::before {
+            content: "✔";
+            font-size: 16px;
+            color: #2f9bff;
+            border: 2px solid #2f9bff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bonus-back-details .bonus-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            color: #e2e8f0;
+        }
+        .bonus-back-details .bonus-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bonus-back-details .bonus-list li::before {
+            content: "›";
+            color: #f8fafc;
+            font-size: 20px;
+            line-height: 1;
         }
         .bonus-back-actions {
             display: flex;
@@ -284,18 +338,22 @@
         }
         .bonus-row {
             display: grid;
-            grid-template-columns: 1.2fr repeat(3, minmax(110px, 1fr)) auto;
-            gap: 18px;
+            grid-template-columns: minmax(240px, 1.2fr) repeat(4, minmax(110px, 1fr)) auto;
+            gap: 22px;
             align-items: center;
         }
         .bonus-brand {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            padding-left: 24px;
         }
         .bonus-logo {
             max-height: 56px;
+            max-width: 180px;
             width: auto;
+            height: auto;
+            object-fit: contain;
         }
         .bonus-code {
             font-size: 12px;
@@ -324,16 +382,38 @@
         }
         .bonus-metric strong {
             display: block;
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .bonus-metric span {
+            display: block;
+            font-size: 14px;
+            color: #dbeafe;
+        }
+        .bonus-info-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
         .info-btn {
-            border: 2px solid rgba(255,255,255,0.7);
-            background: transparent;
-            color: #f8fafc;
+            border: none;
+            background: #f8fafc;
+            color: #0a2a4a;
             border-radius: 999px;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
+            font-weight: 700;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(3,21,38,0.35);
+        }
+        .bonus-back-actions .info-btn {
+            align-self: flex-end;
         }
         .payment-methods {
             display: flex;
@@ -345,19 +425,38 @@
             justify-content: flex-end;
             margin-top: 0;
         }
-        .payment-pill {
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: rgba(10,20,30,0.5);
-            border: 1px solid rgba(255,255,255,0.15);
-            font-size: 12px;
+        .payment-list {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .payment-chip {
+            width: 52px;
+            height: 34px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.12);
         }
-        .payment-icon svg {
-            width: 18px;
-            height: 18px;
+        .payment-chip svg {
+            width: 28px;
+            height: 28px;
+        }
+        .payment-heading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #2f9bff;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .payment-heading svg {
+            width: 20px;
+            height: 20px;
         }
         .editor-columns {
             display: grid;
@@ -392,6 +491,9 @@
             }
             .bonus-metric {
                 text-align: left;
+            }
+            .bonus-brand {
+                padding-left: 0;
             }
             .bonus-back-layout {
                 grid-template-columns: 1fr;
