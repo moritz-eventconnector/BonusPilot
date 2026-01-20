@@ -378,7 +378,8 @@
             flex-direction: column;
             align-items: flex-end;
             gap: 12px;
-            padding-right: 4px;
+            padding-right: 16px;
+            padding-left: 8px;
         }
         .bonus-row {
             display: grid;
