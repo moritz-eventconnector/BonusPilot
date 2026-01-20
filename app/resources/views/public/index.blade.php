@@ -69,7 +69,7 @@
         @endphp
         <div class="flip-card" data-card>
             <div class="flip-card-inner">
-                <div class="flip-card-face">
+                <div class="flip-card-face flip-card-front">
                     @if($bonus->is_featured)
                         <span class="bonus-flame" aria-hidden="true">🔥</span>
                     @endif

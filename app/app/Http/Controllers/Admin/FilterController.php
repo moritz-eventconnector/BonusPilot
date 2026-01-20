@@ -15,7 +15,9 @@ class FilterController extends Controller
 {
     public function index(): View
     {
-        $groups = FilterGroup::with('options')->orderBy('sort_order')->get();
+        $groups = FilterGroup::with(['options' => function ($query) {
+            $query->orderBy('sort_order');
+        }])->orderBy('sort_order')->get();
 
         return view('admin.filters.index', compact('groups'));
     }
