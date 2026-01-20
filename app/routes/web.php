@@ -10,6 +10,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/language/{locale}', function (string $locale) {
+    abort_unless(in_array($locale, ['de', 'en'], true), 404);
+    session(['locale' => $locale]);
+
+    return back();
+})->name('language.switch');
+
 Route::middleware('track')->group(function () {
     Route::get('/', [PublicController::class, 'index'])->name('home');
     Route::get('/bonus/{slug}', [PublicController::class, 'showBonus'])->name('bonus.show');
@@ -30,9 +37,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('bonuses/reorder', [BonusController::class, 'reorder'])->name('bonuses.reorder');
 
     Route::get('filters', [FilterController::class, 'index'])->name('filters.index');
-    Route::post('filters/groups', [FilterController::class, 'storeGroup'])->name('filters.groups.store');
-    Route::patch('filters/groups/{group}', [FilterController::class, 'updateGroup'])->name('filters.groups.update');
-    Route::delete('filters/groups/{group}', [FilterController::class, 'destroyGroup'])->name('filters.groups.destroy');
     Route::post('filters/options', [FilterController::class, 'storeOption'])->name('filters.options.store');
     Route::patch('filters/options/{option}', [FilterController::class, 'updateOption'])->name('filters.options.update');
     Route::delete('filters/options/{option}', [FilterController::class, 'destroyOption'])->name('filters.options.destroy');

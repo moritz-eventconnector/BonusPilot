@@ -98,6 +98,6 @@ class SettingsController extends Controller
             ['value' => $request->boolean('home_hero_enabled') ? '1' : '0']
         );
 
-        return redirect()->route('admin.settings.edit')->with('status', 'Settings updated.');
+        return redirect()->route('admin.settings.edit')->with('status', __('ui.settings.updated'));
     }
 }

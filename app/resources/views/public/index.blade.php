@@ -5,8 +5,8 @@
     $heroEnabled = $settings->get('home_hero_enabled', '1') !== '0';
     $heroTitle = $settings->get('home_hero_title');
     $heroSubtitle = $settings->get('home_hero_subtitle');
-    $defaultHeroTitle = 'Bonus Highlights';
-    $defaultHeroSubtitle = 'Filtere deine Boni und klicke auf ⓘ für mehr Details.';
+    $defaultHeroTitle = __('ui.home.hero_title_default');
+    $defaultHeroSubtitle = __('ui.home.hero_subtitle_default');
     $filterSlug = $filterSlug ?? null;
     $paymentIcons = [
         'visa' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 7h20v10H2z"/><path fill="#1a1f71" d="M2 7h20v10H2z"/><path fill="#fff" d="M7.2 15.6h-1.4l.9-5.1h1.4zm5.6-3.5c-.2-.7-.8-.9-1.4-.9-1 0-1.6.5-1.6 1.2 0 .9 1.3 1.1 1.3 1.6 0 .2-.2.4-.7.4-.4 0-.9-.1-1.2-.3l-.2.9c.4.2.9.3 1.5.3 1.1 0 1.8-.5 1.8-1.3 0-1-1.3-1.1-1.3-1.6 0-.2.2-.4.7-.4.3 0 .6.1.9.2l.2-.8zm6 3.5h-1.3c-.1 0-.2-.1-.2-.2l-1-4.9H17l-1.1 5.1h-1.4l1.9-5.1h1.2c.2 0 .4.1.4.3zm-5.1-5.1h-1.3l-1.8 5.1H12l.3-.9h1.9l.2.9h1.3zm-1 3.2.5-1.4.3 1.4z"/></svg>',
@@ -38,20 +38,18 @@
 @endif
 
 <div class="filters" style="margin-bottom:28px;justify-content:center;">
-    <span class="filter-label">Filter:</span>
+    <span class="filter-label">{{ __('ui.home.filter_label') }}</span>
     <a class="filter-pill" href="{{ route('home') }}">
-        <span {{ $filterSlug ? '' : 'style=background:#f8fafc;color:#0a2a4a;' }}>Alle Boni</span>
+        <span {{ $filterSlug ? '' : 'style=background:#f8fafc;color:#0a2a4a;' }}>{{ __('ui.home.filter_all') }}</span>
     </a>
-    @foreach($groups as $group)
-        @foreach($group->options as $option)
-            @php
-                $isActive = $filterSlug === $option->slug;
-                $query = $isActive ? '' : '?' . http_build_query(['filter' => $option->slug]);
-            @endphp
-            <a class="filter-pill" href="{{ route('home') . $query }}">
-                <span {{ $isActive ? 'style=background:#f8fafc;color:#0a2a4a;' : '' }}>{{ $option->name }}</span>
-            </a>
-        @endforeach
+    @foreach($options as $option)
+        @php
+            $isActive = $filterSlug === $option->slug;
+            $query = $isActive ? '' : '?' . http_build_query(['filter' => $option->slug]);
+        @endphp
+        <a class="filter-pill" href="{{ route('home') . $query }}">
+            <span {{ $isActive ? 'style=background:#f8fafc;color:#0a2a4a;' : '' }}>{{ $option->name }}</span>
+        </a>
     @endforeach
 </div>
 
@@ -60,10 +58,10 @@
         @php
             $methods = array_filter(array_map('trim', explode(',', $bonus->payment_methods ?? '')));
             $metricLabels = [
-                'bonus_percent' => $bonus->bonus_percent_label ?: 'Bonus',
-                'max_bonus' => $bonus->max_bonus_label ?: 'Maxbonus',
-                'max_bet' => $bonus->max_bet_label ?: 'Maxbet',
-                'wager' => $bonus->wager_label ?: 'Wager',
+                'bonus_percent' => $bonus->bonus_percent_label ?: __('ui.bonuses.labels.bonus'),
+                'max_bonus' => $bonus->max_bonus_label ?: __('ui.bonuses.labels.max_bonus'),
+                'max_bet' => $bonus->max_bet_label ?: __('ui.bonuses.labels.max_bet'),
+                'wager' => $bonus->wager_label ?: __('ui.bonuses.labels.wager'),
             ];
             $backLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $bonus->back_text ?? ''))));
         @endphp
@@ -82,7 +80,7 @@
                             @endif
                             @if($bonus->bonus_code)
                                 <span class="bonus-code">
-                                    {{ $bonus->bonus_code_label ?: 'Code' }} ➜ {{ $bonus->bonus_code }}
+                                    {{ $bonus->bonus_code_label ?: __('ui.bonuses.labels.code') }} ➜ {{ $bonus->bonus_code }}
                                 </span>
                             @endif
                             @if($bonus->short_text)
@@ -108,12 +106,12 @@
                         <div class="bonus-actions">
                             @if($bonus->play_url)
                                 <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                    {{ $bonus->cta_label ?: 'Play now' }}
+                                    {{ $bonus->cta_label ?: __('ui.bonuses.cta') }}
                                 </a>
                             @else
-                                <span class="badge">No link yet</span>
+                                <span class="badge">{{ __('ui.bonuses.no_link') }}</span>
                             @endif
-                            <button class="info-btn" type="button" data-flip aria-label="More info">
+                            <button class="info-btn" type="button" data-flip aria-label="{{ __('ui.bonuses.more_info') }}">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20zm0 4.75a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5zm2 12.5h-4v-1.8h1.2V11.2H10V9.5h2.4c.6 0 1 .4 1 1v6h1.6v1.8z"/>
                                 </svg>
@@ -128,7 +126,7 @@
                     <div class="bonus-back-layout">
                         <div class="bonus-back-details">
                             <div class="card-top">
-                                <h3>Information</h3>
+                                <h3>{{ __('ui.bonuses.information') }}</h3>
                             </div>
                             @if(count($backLines))
                                 <ul class="bonus-list">
@@ -137,16 +135,16 @@
                                     @endforeach
                                 </ul>
                             @else
-                                <p>Keine weiteren Details vorhanden.</p>
+                                <p>{{ __('ui.bonuses.no_details') }}</p>
                             @endif
                         </div>
                         <div class="bonus-back-actions">
-                            <button class="info-btn" type="button" data-flip aria-label="Back">⟲</button>
+                            <button class="info-btn" type="button" data-flip aria-label="{{ __('ui.bonuses.back') }}">⟲</button>
                             @if(count($methods))
                                 <div class="payment-methods">
                                     <div class="payment-heading">
                                         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2 0v10h12V7z"/><path fill="currentColor" d="M6 10h6v2H6z"/></svg>
-                                        <span>Payments</span>
+                                        <span>{{ __('ui.bonuses.payments') }}</span>
                                     </div>
                                     <div class="payment-list">
                                         @foreach($methods as $method)
@@ -167,10 +165,10 @@
                             <div class="bonus-actions bonus-actions-vertical">
                                 @if($bonus->play_url)
                                     <a class="btn" href="{{ $bonus->play_url }}" target="_blank">
-                                        {{ $bonus->cta_label ?: 'Play now' }}
+                                        {{ $bonus->cta_label ?: __('ui.bonuses.cta') }}
                                     </a>
                                 @endif
-                                <button class="btn btn-secondary" type="button" data-flip>Go Back</button>
+                                <button class="btn btn-secondary" type="button" data-flip>{{ __('ui.bonuses.go_back') }}</button>
                             </div>
                         </div>
                     </div>
@@ -178,7 +176,7 @@
             </div>
         </div>
     @empty
-        <p>No bonuses found.</p>
+        <p>{{ __('ui.bonuses.empty') }}</p>
     @endforelse
 </div>
 

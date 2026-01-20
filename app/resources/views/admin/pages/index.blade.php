@@ -3,29 +3,29 @@
 @section('content')
 <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;">
-        <h1>Pages</h1>
-        <a class="btn" href="{{ route('admin.pages.create') }}">New Page</a>
+        <h1>{{ __('ui.pages.title') }}</h1>
+        <a class="btn" href="{{ route('admin.pages.create') }}">{{ __('ui.pages.actions.new') }}</a>
     </div>
-    <p>Publish informational pages shown under /p/{slug}.</p>
+    <p>{{ __('ui.pages.subtitle') }}</p>
     <table class="table">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>{{ __('ui.pages.table.title') }}</th>
+            <th>{{ __('ui.pages.table.status') }}</th>
+            <th>{{ __('ui.pages.table.actions') }}</th>
         </tr>
         </thead>
         <tbody>
         @foreach($pages as $page)
             <tr>
                 <td>{{ $page->title }}</td>
-                <td>{{ ucfirst($page->status) }}</td>
+                <td>{{ __('ui.pages.status.' . $page->status) }}</td>
                 <td>
-                    <a href="{{ route('admin.pages.edit', $page) }}">Edit</a>
+                    <a href="{{ route('admin.pages.edit', $page) }}">{{ __('ui.common.edit') }}</a>
                     <form method="POST" action="{{ route('admin.pages.destroy', $page) }}" style="display:inline">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-secondary" type="submit" onclick="return confirm('Delete page?')">Delete</button>
+                        <button class="btn btn-secondary" type="submit" onclick="return confirm('{{ __('ui.pages.confirm_delete') }}')">{{ __('ui.common.delete') }}</button>
                     </form>
                 </td>
             </tr>

@@ -3,18 +3,18 @@
 @section('content')
 <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;">
-        <h1>Bonuses</h1>
-        <a class="btn" href="{{ route('admin.bonuses.create') }}">New Bonus</a>
+        <h1>{{ __('ui.bonuses.title') }}</h1>
+        <a class="btn" href="{{ route('admin.bonuses.create') }}">{{ __('ui.bonuses.actions.new') }}</a>
     </div>
-    <p>Manage bonus listings shown on the homepage.</p>
+    <p>{{ __('ui.bonuses.subtitle') }}</p>
     <table class="table" data-sortable>
         <thead>
         <tr>
             <th></th>
-            <th>Title</th>
-            <th>Active</th>
-            <th>Featured</th>
-            <th>Actions</th>
+            <th>{{ __('ui.bonuses.table.title') }}</th>
+            <th>{{ __('ui.bonuses.table.active') }}</th>
+            <th>{{ __('ui.bonuses.table.featured') }}</th>
+            <th>{{ __('ui.bonuses.table.actions') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -22,14 +22,14 @@
             <tr draggable="true" data-id="{{ $bonus->id }}">
                 <td style="width:32px;cursor:grab;">↕</td>
                 <td>{{ $bonus->title }}</td>
-                <td>{{ $bonus->is_active ? 'Yes' : 'No' }}</td>
-                <td>{{ $bonus->is_featured ? 'Yes' : 'No' }}</td>
+                <td>{{ $bonus->is_active ? __('ui.common.yes') : __('ui.common.no') }}</td>
+                <td>{{ $bonus->is_featured ? __('ui.common.yes') : __('ui.common.no') }}</td>
                 <td>
-                    <a href="{{ route('admin.bonuses.edit', $bonus) }}">Edit</a>
+                    <a href="{{ route('admin.bonuses.edit', $bonus) }}">{{ __('ui.common.edit') }}</a>
                     <form method="POST" action="{{ route('admin.bonuses.destroy', $bonus) }}" style="display:inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-secondary" onclick="return confirm('Delete bonus?')">Delete</button>
+                        <button type="submit" class="btn btn-secondary" onclick="return confirm('{{ __('ui.bonuses.confirm_delete') }}')">{{ __('ui.common.delete') }}</button>
                     </form>
                 </td>
             </tr>
