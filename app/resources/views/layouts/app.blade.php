@@ -32,9 +32,9 @@
             background: linear-gradient(180deg, #0b345c 0%, #0a2a4a 100%);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 18px 24px;
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
-            justify-content: space-between;
             gap: 24px;
         }
         .logo {
@@ -54,12 +54,27 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
+            transition: color 0.2s ease;
         }
-        .nav-links {
+        nav a:hover {
+            color: #93c5fd;
+        }
+        .nav-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            text-align: center;
+        }
+        .nav-primary a {
+            margin-left: 0;
+        }
+        .nav-actions {
             display: flex;
             align-items: center;
             gap: 16px;
             flex-wrap: wrap;
+            justify-content: flex-end;
         }
         .nav-socials {
             display: flex;
@@ -77,6 +92,12 @@
             color: #f8fafc;
             font-weight: 800;
             font-size: 14px;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.16);
+            box-shadow: 0 6px 14px rgba(2, 16, 32, 0.35);
         }
         .social-icon svg {
             width: 16px;
@@ -106,14 +127,29 @@
             cursor: pointer;
             font-weight: 600;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(0,0,0,0.2);
+            filter: brightness(1.05);
+        }
+        .btn:active {
+            transform: translateY(0);
         }
         .btn-secondary {
             background: #6b7280;
+        }
+        .btn-secondary:hover {
+            filter: brightness(1.08);
         }
         .btn-outline {
             background: transparent;
             border: 1px solid rgba(255,255,255,0.5);
             color: #f8fafc;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
         }
         .badge {
             display: inline-block;
@@ -129,6 +165,9 @@
         }
         .grid-3 {
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
         .form-group {
             margin-bottom: 16px;
@@ -190,6 +229,12 @@
             text-transform: uppercase;
             background: transparent;
             min-width: 120px;
+            transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .filter-pill:hover span {
+            transform: translateY(-2px);
+            background: rgba(248,250,252,0.1);
+            box-shadow: 0 8px 16px rgba(2, 16, 32, 0.25);
         }
         .filter-pill input:checked + span {
             background: #f8fafc;
@@ -402,9 +447,9 @@
             letter-spacing: 0.08em;
         }
         .info-btn {
-            border: none;
-            background: #f8fafc;
-            color: #0a2a4a;
+            border: 2px solid rgba(79, 176, 255, 0.6);
+            background: rgba(15, 38, 62, 0.95);
+            color: #e2f2ff;
             border-radius: 999px;
             width: 34px;
             height: 34px;
@@ -414,6 +459,18 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 6px 16px rgba(3,21,38,0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .info-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        .info-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(79, 176, 255, 0.15);
+            border-color: rgba(79, 176, 255, 0.9);
+            box-shadow: 0 10px 18px rgba(3,21,38,0.4);
         }
         .bonus-back-actions .info-btn {
             align-self: flex-end;
@@ -444,6 +501,12 @@
             background: rgba(255,255,255,0.1);
             border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .payment-chip:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.16);
+            box-shadow: 0 8px 14px rgba(2, 16, 32, 0.25);
         }
         .payment-chip svg {
             width: 28px;
@@ -476,6 +539,19 @@
             height: auto;
             display: block;
         }
+        .form-section {
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(148,163,184,0.3);
+            background: rgba(15, 23, 42, 0.6);
+            margin-bottom: 20px;
+        }
+        .form-section h3 {
+            margin-top: 0;
+            margin-bottom: 14px;
+            font-size: 18px;
+            color: #93c5fd;
+        }
         @media (max-width: 768px) {
             .container {
                 padding: 18px;
@@ -484,19 +560,17 @@
                 margin-left: 0;
             }
             header {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 align-items: stretch;
                 padding: 16px;
             }
-            .nav-links {
-                width: 100%;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-            }
-            .nav-links > div {
-                display: flex;
+            .nav-primary {
+                justify-content: flex-start;
                 flex-wrap: wrap;
+            }
+            .nav-actions {
+                width: 100%;
+                justify-content: flex-start;
                 gap: 12px;
             }
             .nav-socials {
@@ -587,11 +661,11 @@
         @endif
         <span>{{ $settings->get('site_name', 'BonusPilot') }}</span>
     </div>
-    <nav class="nav-links">
-        <div>
-            <a href="{{ route('home') }}">Bonis</a>
-            <a href="{{ route('page.show', 'gluecksrad') }}">Glücksrad</a>
-        </div>
+    <div class="nav-primary">
+        <a href="{{ route('home') }}">Bonis</a>
+        <a href="{{ route('page.show', 'gluecksrad') }}">Glücksrad</a>
+    </div>
+    <nav class="nav-actions">
         <div class="nav-socials">
             @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
                 @if($settings->get($social))

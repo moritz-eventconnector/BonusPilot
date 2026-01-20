@@ -113,7 +113,11 @@
                             @else
                                 <span class="badge">No link yet</span>
                             @endif
-                            <button class="info-btn" type="button" data-flip aria-label="More info">ⓘ</button>
+                            <button class="info-btn" type="button" data-flip aria-label="More info">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20zm0 4.75a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5zm2 12.5h-4v-1.8h1.2V11.2H10V9.5h2.4c.6 0 1 .4 1 1v6h1.6v1.8z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
