@@ -730,10 +730,6 @@
         <a href="{{ route('page.show', 'gluecksrad') }}">{{ __('ui.nav.wheel') }}</a>
     </div>
     <nav class="nav-actions">
-        @php
-            $currentLocale = app()->getLocale();
-            $toggleLocale = $currentLocale === 'de' ? 'en' : 'de';
-        @endphp
         <div class="nav-socials">
             @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
                 @if($settings->get($social))
@@ -743,12 +739,20 @@
                 @endif
             @endforeach
         </div>
-        <form method="POST" action="{{ route('language.switch', $toggleLocale) }}" style="display:inline">
-            @csrf
-            <button class="btn btn-outline" type="submit" aria-label="{{ __('ui.language.switch') }}">
-                {{ strtoupper($toggleLocale) }}
-            </button>
-        </form>
+        @auth
+            @if(auth()->user()->is_admin && request()->routeIs('admin.*'))
+                @php
+                    $currentLocale = app()->getLocale();
+                    $toggleLocale = $currentLocale === 'de' ? 'en' : 'de';
+                @endphp
+                <form method="POST" action="{{ route('admin.language.switch', $toggleLocale) }}" style="display:inline">
+                    @csrf
+                    <button class="btn btn-outline" type="submit" aria-label="{{ __('ui.language.switch') }}">
+                        {{ strtoupper($toggleLocale) }}
+                    </button>
+                </form>
+            @endif
+        @endauth
         @auth
             @if(auth()->user()->is_admin)
                 <a href="{{ route('admin.bonuses.index') }}">{{ __('ui.nav.admin') }}</a>
