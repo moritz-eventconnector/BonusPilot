@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
@@ -22,7 +23,11 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view) {
             $settings = Setting::all()->pluck('value', 'key');
+            $navPages = Page::where('status', 'published')
+                ->orderBy('title')
+                ->get(['id', 'title', 'slug']);
             $view->with('settings', $settings);
+            $view->with('navPages', $navPages);
         });
     }
 }

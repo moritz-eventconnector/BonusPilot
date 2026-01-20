@@ -808,7 +808,9 @@
     </div>
     <div class="nav-primary">
         <a class="nav-link{{ request()->routeIs('home') ? ' is-active' : '' }}" href="{{ route('home') }}">{{ __('ui.nav.bonuses') }}</a>
-        <a class="nav-link{{ request()->routeIs('page.show') && request()->route('slug') === 'gluecksrad' ? ' is-active' : '' }}" href="{{ route('page.show', 'gluecksrad') }}">{{ __('ui.nav.wheel') }}</a>
+        @foreach($navPages as $navPage)
+            <a class="nav-link{{ request()->routeIs('page.show') && request()->route('slug') === $navPage->slug ? ' is-active' : '' }}" href="{{ route('page.show', $navPage->slug) }}">{{ $navPage->title }}</a>
+        @endforeach
     </div>
     <nav class="nav-actions">
         <div class="nav-socials">
