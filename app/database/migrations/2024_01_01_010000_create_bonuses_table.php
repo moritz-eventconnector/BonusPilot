@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('terms_url')->nullable();
             $table->text('back_text')->nullable();
             $table->text('payment_methods')->nullable();
+            $table->string('go_back_label')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->integer('sort_order')->default(0);

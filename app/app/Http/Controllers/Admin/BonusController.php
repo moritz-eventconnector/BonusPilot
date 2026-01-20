@@ -120,6 +120,7 @@ class BonusController extends Controller
             'terms_url' => ['nullable', 'url'],
             'back_text' => ['nullable', 'string'],
             'payment_methods' => ['nullable', 'string'],
+            'go_back_label' => ['nullable', 'string', 'max:255'],
             'bonus_icon' => ['nullable', 'file', 'mimes:jpg,jpeg,png,svg', 'max:2048'],
         ]);
     }

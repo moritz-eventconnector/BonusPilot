@@ -64,6 +64,7 @@
                 'wager' => $bonus->wager_label ?: __('ui.bonuses.labels.wager'),
             ];
             $backLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $bonus->back_text ?? ''))));
+            $goBackLabel = $bonus->go_back_label ?: __('ui.bonuses.go_back');
         @endphp
         <div class="flip-card" data-card>
             <div class="flip-card-inner">
@@ -165,7 +166,7 @@
                                         {{ $bonus->cta_label ?: __('ui.bonuses.cta') }}
                                     </a>
                                 @endif
-                                <button class="btn btn-secondary" type="button" data-flip>{{ __('ui.bonuses.go_back') }}</button>
+                                <button class="btn btn-secondary" type="button" data-flip>{{ $goBackLabel }}</button>
                             </div>
                         </div>
                     </div>
