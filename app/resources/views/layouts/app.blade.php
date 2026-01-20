@@ -49,17 +49,19 @@
             letter-spacing: 0.03em;
             padding: 6px 14px;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(148,163,184,0.4);
-            box-shadow: 0 6px 16px rgba(2, 16, 32, 0.35);
+            color: var(--brand-primary);
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148,163,184,0.3);
+            box-shadow: 0 8px 18px rgba(2, 16, 32, 0.35);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
         }
         .logo-name--highlight {
-            background: linear-gradient(120deg, #f8fafc 0%, #93c5fd 35%, #fef3c7 50%, #f8fafc 70%, #93c5fd 100%);
+            background: linear-gradient(120deg, #f8fafc 0%, var(--brand-primary) 45%, #f8fafc 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 12px rgba(147, 197, 253, 0.4), 0 2px 8px rgba(15, 23, 42, 0.45);
-            border-color: rgba(255,255,255,0.4);
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4), 0 2px 8px rgba(15, 23, 42, 0.45);
+            border-color: rgba(255,255,255,0.3);
             background-color: rgba(15, 23, 42, 0.4);
         }
         .logo img {
