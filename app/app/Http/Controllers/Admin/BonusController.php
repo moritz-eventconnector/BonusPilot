@@ -103,7 +103,6 @@ class BonusController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'casino_name' => ['nullable', 'string', 'max:255'],
             'short_text' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string'],
             'bonus_code' => ['nullable', 'string', 'max:255'],
             'bonus_code_label' => ['nullable', 'string', 'max:255'],
             'bonus_percent' => ['nullable', 'integer', 'min:0'],

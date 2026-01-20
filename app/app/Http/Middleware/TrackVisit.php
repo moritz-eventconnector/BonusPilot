@@ -12,7 +12,6 @@ class TrackVisit
 {
     private const TRACKABLE_ROUTES = [
         'home',
-        'bonus.show',
         'page.show',
     ];
 

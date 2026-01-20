@@ -15,7 +15,6 @@ class Bonus extends Model
         'slug',
         'casino_name',
         'short_text',
-        'content',
         'bonus_code',
         'bonus_code_label',
         'bonus_percent',

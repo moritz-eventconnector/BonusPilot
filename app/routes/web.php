@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('track')->group(function () {
     Route::get('/', [PublicController::class, 'index'])->name('home');
-    Route::get('/bonus/{slug}', [PublicController::class, 'showBonus'])->name('bonus.show');
     Route::get('/p/{slug}', [PublicController::class, 'showPage'])->name('page.show');
 });
 Route::get('/bonus-icon/{bonus}', [PublicController::class, 'bonusIcon'])->name('bonus.icon');

@@ -39,15 +39,6 @@ class PublicController extends Controller
         return view('public.index', compact('options', 'bonuses', 'filterSlug'));
     }
 
-    public function showBonus(string $slug): View
-    {
-        $bonus = Bonus::where('slug', $slug)
-            ->where('is_active', true)
-            ->firstOrFail();
-
-        return view('public.bonus', compact('bonus'));
-    }
-
     public function showPage(string $slug): View
     {
         $page = Page::where('slug', $slug)
