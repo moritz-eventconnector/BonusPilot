@@ -14,6 +14,7 @@
             --brand-secondary: {{ $settings->get('secondary_color', '#1e293b') }};
             --brand-bg: {{ $settings->get('background_color', '#0f172a') }};
             --brand-bg-image: {{ $settings->get('background_image_path') ? "url('" . asset('storage/' . $settings->get('background_image_path')) . "')" : 'none' }};
+            --brand-header-bg: {{ $settings->get('header_background', 'linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%)') }};
         }
         * { box-sizing: border-box; }
         body {
@@ -41,7 +42,7 @@
         }
         a { color: #e2e8f0; text-decoration: none; }
         header {
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%);
+            background: var(--brand-header-bg);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 18px 24px;
             display: grid;

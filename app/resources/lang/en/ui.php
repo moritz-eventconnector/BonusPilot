@@ -223,6 +223,7 @@ return [
         'primary_color' => 'Primary color',
         'secondary_color' => 'Secondary color',
         'background_color' => 'Background color',
+        'header_background' => 'Header background',
         'background_image' => 'Background image (optional)',
         'remove_background_image' => 'Remove background image',
         'hero' => 'Homepage hero',

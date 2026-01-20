@@ -38,6 +38,10 @@
                 <input type="text" name="background_color" value="{{ old('background_color', $settings->get('background_color')) }}" placeholder="#0b345c">
             </div>
             <div class="form-group">
+                <label>{{ __('ui.settings.header_background') }}</label>
+                <input type="text" name="header_background" value="{{ old('header_background', $settings->get('header_background')) }}" placeholder="linear-gradient(180deg, #0f172a, #020617)">
+            </div>
+            <div class="form-group">
                 <label>{{ __('ui.settings.background_image') }}</label>
                 <input type="file" name="background_image" accept="image/*">
                 @if($settings->get('background_image_path'))
