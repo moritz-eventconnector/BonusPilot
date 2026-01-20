@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $settings = Setting::all()->pluck('value', 'key');
             $navPages = Page::where('status', 'published')
+                ->orderBy('nav_order')
                 ->orderBy('title')
                 ->get(['id', 'title', 'slug']);
             $view->with('settings', $settings);

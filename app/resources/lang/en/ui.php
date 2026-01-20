@@ -169,6 +169,7 @@ return [
     'pages' => [
         'title' => 'Pages',
         'subtitle' => 'Publish informational pages shown under /p/{slug}.',
+        'drag_hint' => 'Drag and drop pages to update the navigation order.',
         'create_title' => 'Create page',
         'edit_title' => 'Edit page',
         'confirm_delete' => 'Delete page?',

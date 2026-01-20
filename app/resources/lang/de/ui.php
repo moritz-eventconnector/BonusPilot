@@ -169,6 +169,7 @@ return [
     'pages' => [
         'title' => 'Seiten',
         'subtitle' => 'Veröffentliche Infoseiten unter /p/{slug}.',
+        'drag_hint' => 'Ziehe die Seiten per Drag & Drop, um die Navigation zu sortieren.',
         'create_title' => 'Seite erstellen',
         'edit_title' => 'Seite bearbeiten',
         'confirm_delete' => 'Seite löschen?',
