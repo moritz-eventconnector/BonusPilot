@@ -14,7 +14,9 @@ class PageController extends Controller
 {
     public function index(): View
     {
-        $pages = Page::orderByDesc('updated_at')->paginate(20);
+        $pages = Page::orderBy('nav_order')
+            ->orderByDesc('updated_at')
+            ->paginate(20);
 
         return view('admin.pages.index', compact('pages'));
     }
@@ -28,6 +30,7 @@ class PageController extends Controller
     {
         $data = $this->validateData($request);
         $data['slug'] = Str::slug($data['slug'] ?: $data['title']);
+        $data['nav_order'] = Page::max('nav_order') + 1;
 
         $request->validate([
             'title' => ['required', Rule::unique('pages', 'title')],
@@ -76,5 +79,19 @@ class PageController extends Controller
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:255'],
         ]);
+    }
+
+    public function reorder(Request $request)
+    {
+        $data = $request->validate([
+            'order' => ['required', 'array'],
+            'order.*' => ['integer', 'exists:pages,id'],
+        ]);
+
+        foreach ($data['order'] as $index => $pageId) {
+            Page::whereKey($pageId)->update(['nav_order' => $index]);
+        }
+
+        return response()->noContent();
     }
 }

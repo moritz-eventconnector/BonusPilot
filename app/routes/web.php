@@ -41,6 +41,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('filters/options/{option}', [FilterController::class, 'destroyOption'])->name('filters.options.destroy');
 
     Route::resource('pages', PageController::class)->except(['show']);
+    Route::post('pages/reorder', [PageController::class, 'reorder'])->name('pages.reorder');
 
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 

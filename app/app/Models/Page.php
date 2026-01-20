@@ -16,5 +16,6 @@ class Page extends Model
         'content',
         'seo_title',
         'seo_description',
+        'nav_order',
     ];
 }
