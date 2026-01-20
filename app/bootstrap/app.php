@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => App\Http\Middleware\AdminMiddleware::class,
             'auth' => App\Http\Middleware\Authenticate::class,
+            'track' => App\Http\Middleware\TrackVisit::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         ]);
     })

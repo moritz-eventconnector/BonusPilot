@@ -3,16 +3,19 @@
 use App\Http\Controllers\Admin\BonusController;
 use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PublicController::class, 'index'])->name('home');
-Route::get('/bonus/{slug}', [PublicController::class, 'showBonus'])->name('bonus.show');
+Route::middleware('track')->group(function () {
+    Route::get('/', [PublicController::class, 'index'])->name('home');
+    Route::get('/bonus/{slug}', [PublicController::class, 'showBonus'])->name('bonus.show');
+    Route::get('/p/{slug}', [PublicController::class, 'showPage'])->name('page.show');
+});
 Route::get('/bonus-icon/{bonus}', [PublicController::class, 'bonusIcon'])->name('bonus.icon');
-Route::get('/p/{slug}', [PublicController::class, 'showPage'])->name('page.show');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
@@ -35,6 +38,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('filters/options/{option}', [FilterController::class, 'destroyOption'])->name('filters.options.destroy');
 
     Route::resource('pages', PageController::class)->except(['show']);
+
+    Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');

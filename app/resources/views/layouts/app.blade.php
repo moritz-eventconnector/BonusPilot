@@ -46,6 +46,7 @@
         }
         .logo img {
             height: 40px;
+            max-width: 160px;
         }
         nav a {
             margin-left: 20px;
@@ -290,6 +291,7 @@
             flex-direction: column;
             gap: 10px;
             text-align: left;
+            word-break: break-word;
         }
         .bonus-back-details h3 {
             color: #4fb0ff;
@@ -475,35 +477,92 @@
             display: block;
         }
         @media (max-width: 768px) {
+            .container {
+                padding: 18px;
+            }
             nav a {
-                margin-left: 8px;
+                margin-left: 0;
             }
             header {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
+                padding: 16px;
             }
             .nav-links {
                 width: 100%;
-                justify-content: space-between;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .nav-links > div {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .nav-socials {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                gap: 8px;
+            }
+            .filter-pill span {
+                min-width: 96px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .hero {
+                text-align: left;
             }
             .bonus-row {
                 grid-template-columns: 1fr;
                 text-align: left;
+                gap: 16px;
             }
             .bonus-metric {
                 text-align: left;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 12px;
+                background: rgba(15, 23, 42, 0.55);
+                border-radius: 12px;
+            }
+            .bonus-metric strong {
+                font-size: 18px;
             }
             .bonus-brand {
                 padding-left: 0;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .bonus-logo {
+                max-width: 140px;
+            }
+            .bonus-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .bonus-actions .btn {
+                flex: 1 1 auto;
             }
             .bonus-back-layout {
                 grid-template-columns: 1fr;
             }
             .bonus-back-actions {
-                align-items: flex-start;
+                align-items: stretch;
             }
             .bonus-back-actions .payment-methods {
                 justify-content: flex-start;
+            }
+            .bonus-actions-vertical .btn {
+                width: 100%;
+            }
+            .flip-card-face {
+                padding: 18px;
             }
             .editor-columns {
                 grid-template-columns: 1fr;
@@ -561,6 +620,7 @@
                 <a href="{{ route('admin.bonuses.index') }}" style="color:#fff;">Bonuses</a>
                 <a href="{{ route('admin.filters.index') }}" style="color:#fff;">Filters</a>
                 <a href="{{ route('admin.pages.index') }}" style="color:#fff;">Pages</a>
+                <a href="{{ route('admin.analytics.index') }}" style="color:#fff;">Analytics</a>
                 <a href="{{ route('admin.settings.edit') }}" style="color:#fff;">Settings</a>
                 <a href="{{ route('admin.backups.index') }}" style="color:#fff;">Backups</a>
             </div>

@@ -181,6 +181,16 @@
 <script>
     const cards = document.querySelectorAll('[data-card]');
 
+    const updateCardHeights = () => {
+        cards.forEach((card) => {
+            const inner = card.querySelector('.flip-card-inner');
+            const faces = card.querySelectorAll('.flip-card-face');
+            const heights = Array.from(faces).map((face) => face.scrollHeight);
+            const maxHeight = Math.max(220, ...heights);
+            inner.style.minHeight = `${maxHeight}px`;
+        });
+    };
+
     const closeAll = () => {
         cards.forEach((card) => card.classList.remove('is-flipped'));
     };
@@ -195,6 +205,7 @@
                 card.classList.add('is-flipped');
                 flipButton.focus();
             }
+            updateCardHeights();
         });
     });
 
@@ -209,5 +220,8 @@
             }
         }
     });
+
+    window.addEventListener('load', updateCardHeights);
+    window.addEventListener('resize', updateCardHeights);
 </script>
 @endsection
