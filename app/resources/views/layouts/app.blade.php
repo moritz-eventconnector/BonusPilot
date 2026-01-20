@@ -78,6 +78,36 @@
         nav a:hover {
             color: #93c5fd;
         }
+        .nav-link {
+            position: relative;
+            padding: 6px 12px;
+            border-radius: 999px;
+        }
+        .nav-link.is-active {
+            color: #0f172a;
+            background: #e0f2fe;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+        .admin-nav {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .admin-nav a {
+            color: #fff;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .admin-nav a:hover {
+            color: #e0f2fe;
+            background: rgba(59, 130, 246, 0.18);
+        }
+        .admin-nav a.is-active {
+            background: rgba(59, 130, 246, 0.35);
+            box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.6);
+        }
         .nav-primary {
             display: flex;
             align-items: center;
@@ -766,8 +796,8 @@
         <span class="logo-name{{ $settings->get('logo_path') ? '' : ' logo-name--highlight' }}">{{ $settings->get('site_name', 'BonusPilot') }}</span>
     </div>
     <div class="nav-primary">
-        <a href="{{ route('home') }}">{{ __('ui.nav.bonuses') }}</a>
-        <a href="{{ route('page.show', 'gluecksrad') }}">{{ __('ui.nav.wheel') }}</a>
+        <a class="nav-link{{ request()->routeIs('home') ? ' is-active' : '' }}" href="{{ route('home') }}">{{ __('ui.nav.bonuses') }}</a>
+        <a class="nav-link{{ request()->routeIs('page.show') && request()->route('slug') === 'gluecksrad' ? ' is-active' : '' }}" href="{{ route('page.show', 'gluecksrad') }}">{{ __('ui.nav.wheel') }}</a>
     </div>
     <nav class="nav-actions">
         <div class="nav-socials">
@@ -795,7 +825,7 @@
         @endauth
         @auth
             @if(auth()->user()->is_admin)
-                <a href="{{ route('admin.bonuses.index') }}">{{ __('ui.nav.admin') }}</a>
+                <a class="nav-link{{ request()->routeIs('admin.*') ? ' is-active' : '' }}" href="{{ route('admin.bonuses.index') }}">{{ __('ui.nav.admin') }}</a>
             @endif
             <form method="POST" action="{{ route('logout') }}" style="display:inline">
                 @csrf
@@ -807,14 +837,14 @@
 
 @auth
     @if(auth()->user()->is_admin)
-        <div style="background:#111827;color:#fff;">
-            <div class="container" style="display:flex;gap:16px;flex-wrap:wrap;">
-                <a href="{{ route('admin.bonuses.index') }}" style="color:#fff;">{{ __('ui.nav.bonuses_admin') }}</a>
-                <a href="{{ route('admin.filters.index') }}" style="color:#fff;">{{ __('ui.nav.filters') }}</a>
-                <a href="{{ route('admin.pages.index') }}" style="color:#fff;">{{ __('ui.nav.pages') }}</a>
-                <a href="{{ route('admin.analytics.index') }}" style="color:#fff;">{{ __('ui.nav.analytics') }}</a>
-                <a href="{{ route('admin.settings.edit') }}" style="color:#fff;">{{ __('ui.nav.settings') }}</a>
-                <a href="{{ route('admin.backups.index') }}" style="color:#fff;">{{ __('ui.nav.backups') }}</a>
+        <div style="background:#1f2937;color:#fff;border-bottom:1px solid rgba(148,163,184,0.3);">
+            <div class="container admin-nav">
+                <a class="{{ request()->routeIs('admin.bonuses.*') ? 'is-active' : '' }}" href="{{ route('admin.bonuses.index') }}">{{ __('ui.nav.bonuses_admin') }}</a>
+                <a class="{{ request()->routeIs('admin.filters.*') ? 'is-active' : '' }}" href="{{ route('admin.filters.index') }}">{{ __('ui.nav.filters') }}</a>
+                <a class="{{ request()->routeIs('admin.pages.*') ? 'is-active' : '' }}" href="{{ route('admin.pages.index') }}">{{ __('ui.nav.pages') }}</a>
+                <a class="{{ request()->routeIs('admin.analytics.*') ? 'is-active' : '' }}" href="{{ route('admin.analytics.index') }}">{{ __('ui.nav.analytics') }}</a>
+                <a class="{{ request()->routeIs('admin.settings.*') ? 'is-active' : '' }}" href="{{ route('admin.settings.edit') }}">{{ __('ui.nav.settings') }}</a>
+                <a class="{{ request()->routeIs('admin.backups.*') ? 'is-active' : '' }}" href="{{ route('admin.backups.index') }}">{{ __('ui.nav.backups') }}</a>
             </div>
         </div>
     @endif
