@@ -10,13 +10,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/language/{locale}', function (string $locale) {
-    abort_unless(in_array($locale, ['de', 'en'], true), 404);
-    session(['locale' => $locale]);
-
-    return back();
-})->name('language.switch');
-
 Route::middleware('track')->group(function () {
     Route::get('/', [PublicController::class, 'index'])->name('home');
     Route::get('/bonus/{slug}', [PublicController::class, 'showBonus'])->name('bonus.show');
@@ -32,6 +25,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/', function () {
         return redirect()->route('admin.bonuses.index');
     })->name('dashboard');
+
+    Route::post('language/{locale}', function (string $locale) {
+        abort_unless(in_array($locale, ['de', 'en'], true), 404);
+        session(['locale' => $locale]);
+
+        return back();
+    })->name('language.switch');
 
     Route::resource('bonuses', BonusController::class)->except(['show']);
     Route::post('bonuses/reorder', [BonusController::class, 'reorder'])->name('bonuses.reorder');
