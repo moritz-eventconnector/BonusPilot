@@ -26,11 +26,6 @@
             @endif
         </div>
     </div>
-    <div class="form-group">
-        <label>{{ __('ui.bonuses.form.description') }}</label>
-        <textarea name="content" rows="4">{{ old('content', $bonus->content ?? '') }}</textarea>
-        <span class="form-help">{{ __('ui.bonuses.form.description_help') }}</span>
-    </div>
 </div>
 
 <div class="form-section">

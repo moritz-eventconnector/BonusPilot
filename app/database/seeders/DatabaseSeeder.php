@@ -47,7 +47,6 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Welcome Bonus',
                 'casino_name' => 'BonusPilot Casino',
                 'short_text' => 'Get 100% up to €200',
-                'content' => 'Claim your welcome bonus and start playing today.',
                 'bonus_code' => 'SLOTHUNTERZZ',
                 'bonus_code_label' => 'Code',
                 'bonus_percent' => 100,
