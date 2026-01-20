@@ -10,9 +10,9 @@
     @endif
     <style>
         :root {
-            --brand-primary: {{ $settings->get('primary_color', '#2563eb') }};
-            --brand-secondary: {{ $settings->get('secondary_color', '#1f2937') }};
-            --brand-bg: {{ $settings->get('background_color', '#0b345c') }};
+            --brand-primary: {{ $settings->get('primary_color', '#38bdf8') }};
+            --brand-secondary: {{ $settings->get('secondary_color', '#1e293b') }};
+            --brand-bg: {{ $settings->get('background_color', '#0f172a') }};
             --brand-bg-image: {{ $settings->get('background_image_path') ? "url('" . asset('storage/' . $settings->get('background_image_path')) . "')" : 'none' }};
         }
         * { box-sizing: border-box; }
@@ -29,7 +29,7 @@
         }
         a { color: #e2e8f0; text-decoration: none; }
         header {
-            background: linear-gradient(180deg, #0b345c 0%, #0a2a4a 100%);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 18px 24px;
             display: grid;
@@ -46,11 +46,10 @@
         }
         .logo-name {
             font-size: 20px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            letter-spacing: 0.03em;
             padding: 6px 14px;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.35);
+            background: rgba(15, 23, 42, 0.55);
             border: 1px solid rgba(148,163,184,0.4);
             box-shadow: 0 6px 16px rgba(2, 16, 32, 0.35);
         }
@@ -71,8 +70,7 @@
             margin-left: 20px;
             color: #f8fafc;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.02em;
             transition: color 0.2s ease;
         }
         nav a:hover {
@@ -129,16 +127,16 @@
             padding: 24px;
         }
         .card {
-            background: #0b2a46;
+            background: rgba(15, 23, 42, 0.85);
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(148,163,184,0.25);
             padding: 16px;
             margin-bottom: 16px;
             color: #e2e8f0;
         }
         .btn {
             display: inline-block;
-            background: linear-gradient(180deg, #1d79c2, #155b92);
+            background: linear-gradient(180deg, var(--brand-primary), #0ea5e9);
             color: #fff;
             padding: 10px 16px;
             border-radius: 10px;
@@ -157,7 +155,7 @@
             transform: translateY(0);
         }
         .btn-secondary {
-            background: #6b7280;
+            background: #334155;
         }
         .btn-secondary:hover {
             filter: brightness(1.08);
@@ -223,9 +221,8 @@
         }
         .filter-label {
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #f8fafc;
+            letter-spacing: 0.04em;
+            color: #e2e8f0;
             align-self: center;
         }
         .filter-pill {
@@ -242,22 +239,21 @@
             justify-content: center;
             padding: 8px 18px;
             border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.7);
-            color: #f8fafc;
+            border: 2px solid rgba(148, 163, 184, 0.6);
+            color: #e2e8f0;
             font-weight: 700;
-            text-transform: uppercase;
-            background: transparent;
+            background: rgba(15, 23, 42, 0.4);
             min-width: 120px;
             transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
         }
         .filter-pill:hover span {
             transform: translateY(-2px);
-            background: rgba(248,250,252,0.1);
+            background: rgba(148, 163, 184, 0.18);
             box-shadow: 0 8px 16px rgba(2, 16, 32, 0.25);
         }
         .filter-pill input:checked + span {
-            background: #f8fafc;
-            color: #0a2a4a;
+            background: #e2e8f0;
+            color: #0f172a;
         }
         .table {
             width: 100%;
@@ -354,7 +350,7 @@
             word-break: break-word;
         }
         .bonus-back-details h3 {
-            color: #4fb0ff;
+            color: #7dd3fc;
             font-size: 20px;
             margin: 0;
             display: flex;
@@ -364,8 +360,8 @@
         .bonus-back-details h3::before {
             content: "✔";
             font-size: 16px;
-            color: #2f9bff;
-            border: 2px solid #2f9bff;
+            color: #38bdf8;
+            border: 2px solid #38bdf8;
             border-radius: 50%;
             width: 18px;
             height: 18px;
@@ -426,14 +422,13 @@
             align-items: center;
             gap: 6px;
             font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #fde68a;
+            letter-spacing: 0.03em;
+            color: #fcd34d;
             font-weight: 700;
             padding: 4px 10px;
             border-radius: 999px;
-            background: rgba(250, 204, 21, 0.18);
-            border: 1px solid rgba(250, 204, 21, 0.5);
+            background: rgba(234, 179, 8, 0.18);
+            border: 1px solid rgba(234, 179, 8, 0.5);
             box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
         }
         .bonus-actions {
@@ -471,8 +466,7 @@
             align-items: center;
             gap: 6px;
             font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.03em;
         }
         .info-btn {
             border: 2px solid rgba(79, 176, 255, 0.6);
@@ -738,6 +732,12 @@
             }
             .editor-columns {
                 grid-template-columns: 1fr;
+            }
+            footer .container {
+                text-align: center;
+            }
+            footer .filters {
+                justify-content: center;
             }
         }
     </style>
