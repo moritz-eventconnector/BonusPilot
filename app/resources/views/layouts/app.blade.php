@@ -44,6 +44,17 @@
             font-weight: bold;
             color: #f8fafc;
         }
+        .logo-name {
+            font-size: 18px;
+            letter-spacing: 0.02em;
+        }
+        .logo-name--highlight {
+            background: linear-gradient(120deg, #f8fafc 0%, #93c5fd 35%, #fef3c7 50%, #f8fafc 70%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(147, 197, 253, 0.4), 0 2px 8px rgba(15, 23, 42, 0.45);
+        }
         .logo img {
             height: 40px;
             max-width: 160px;
@@ -627,18 +638,28 @@
                 grid-template-columns: 1fr;
                 align-items: stretch;
                 padding: 16px;
+                text-align: center;
+            }
+            .logo {
+                justify-content: center;
             }
             .nav-primary {
-                justify-content: flex-start;
+                justify-content: center;
                 flex-wrap: wrap;
+            }
+            .logo-name {
+                font-size: 20px;
+            }
+            .logo-name--highlight {
+                font-size: 22px;
             }
             .nav-actions {
                 width: 100%;
-                justify-content: flex-start;
+                justify-content: center;
                 gap: 12px;
             }
             .nav-socials {
-                justify-content: flex-start;
+                justify-content: center;
                 flex-wrap: wrap;
             }
             .filters {
@@ -724,7 +745,7 @@
         @if($settings->get('logo_path'))
             <img src="{{ asset('storage/' . $settings->get('logo_path')) }}" alt="Logo">
         @endif
-        <span>{{ $settings->get('site_name', 'BonusPilot') }}</span>
+        <span class="logo-name{{ $settings->get('logo_path') ? '' : ' logo-name--highlight' }}">{{ $settings->get('site_name', 'BonusPilot') }}</span>
     </div>
     <div class="nav-primary">
         <a href="{{ route('home') }}">{{ __('ui.nav.bonuses') }}</a>
