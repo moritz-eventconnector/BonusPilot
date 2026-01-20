@@ -2,44 +2,44 @@
 
 @section('content')
     <div class="card">
-        <h2 style="margin-top:0;">Analytics</h2>
+        <h2 style="margin-top:0;">{{ __('ui.analytics.title') }}</h2>
         <p style="margin:6px 0 0;color:#94a3b8;">
-            Zeitraum: {{ $start->format('d.m.Y') }} – {{ $end->format('d.m.Y') }}
+            {{ __('ui.analytics.range') }}: {{ $start->format('d.m.Y') }} – {{ $end->format('d.m.Y') }}
         </p>
         <form method="GET" action="{{ route('admin.analytics.index') }}" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:end;">
             <div class="form-group" style="margin:0;">
-                <label>Von</label>
+                <label>{{ __('ui.analytics.from') }}</label>
                 <input type="date" name="from" value="{{ $start->format('Y-m-d') }}">
             </div>
             <div class="form-group" style="margin:0;">
-                <label>Bis</label>
+                <label>{{ __('ui.analytics.to') }}</label>
                 <input type="date" name="to" value="{{ $end->format('Y-m-d') }}">
             </div>
-            <button class="btn" type="submit">Zeitraum anwenden</button>
-            <a class="btn btn-secondary" href="{{ route('admin.analytics.index') }}">Zurücksetzen</a>
+            <button class="btn" type="submit">{{ __('ui.analytics.apply') }}</button>
+            <a class="btn btn-secondary" href="{{ route('admin.analytics.index') }}">{{ __('ui.common.reset') }}</a>
         </form>
     </div>
 
     <div class="grid grid-3">
         <div class="card">
             <strong style="font-size:28px;display:block;">{{ $totalVisits }}</strong>
-            <span style="color:#94a3b8;">Besuche gesamt</span>
+            <span style="color:#94a3b8;">{{ __('ui.analytics.total_visits') }}</span>
         </div>
         <div class="card">
             <strong style="font-size:28px;display:block;">{{ $sources->first()->total ?? 0 }}</strong>
-            <span style="color:#94a3b8;">Top-Quelle: {{ $sources->first()->source ?? '—' }}</span>
+            <span style="color:#94a3b8;">{{ __('ui.analytics.top_source') }}: {{ $sources->first()->source ?? '—' }}</span>
         </div>
         <div class="card">
             <strong style="font-size:28px;display:block;">{{ $topPages->first()->total ?? 0 }}</strong>
-            <span style="color:#94a3b8;">Top-Seite: {{ $topPages->first()->path ?? '—' }}</span>
+            <span style="color:#94a3b8;">{{ __('ui.analytics.top_page') }}: {{ $topPages->first()->path ?? '—' }}</span>
         </div>
     </div>
 
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
         <div class="card">
-            <h3 style="margin-top:0;">Besuche pro Tag</h3>
+            <h3 style="margin-top:0;">{{ __('ui.analytics.daily_visits') }}</h3>
             @if($dailyVisits->isEmpty())
-                <p style="color:#94a3b8;">Noch keine Daten vorhanden.</p>
+                <p style="color:#94a3b8;">{{ __('ui.analytics.empty') }}</p>
             @else
                 <div style="display:flex;flex-direction:column;gap:8px;">
                     @foreach($dailyVisits as $row)
@@ -55,15 +55,15 @@
             @endif
         </div>
         <div class="card">
-            <h3 style="margin-top:0;">Besucherquellen</h3>
+            <h3 style="margin-top:0;">{{ __('ui.analytics.sources') }}</h3>
             @if($sources->isEmpty())
-                <p style="color:#94a3b8;">Noch keine Daten vorhanden.</p>
+                <p style="color:#94a3b8;">{{ __('ui.analytics.empty') }}</p>
             @else
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Quelle</th>
-                            <th>Besuche</th>
+                            <th>{{ __('ui.analytics.table.source') }}</th>
+                            <th>{{ __('ui.analytics.table.visits') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,15 +78,15 @@
             @endif
         </div>
         <div class="card">
-            <h3 style="margin-top:0;">Top-Seiten</h3>
+            <h3 style="margin-top:0;">{{ __('ui.analytics.top_pages') }}</h3>
             @if($topPages->isEmpty())
-                <p style="color:#94a3b8;">Noch keine Daten vorhanden.</p>
+                <p style="color:#94a3b8;">{{ __('ui.analytics.empty') }}</p>
             @else
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Pfad</th>
-                            <th>Besuche</th>
+                            <th>{{ __('ui.analytics.table.path') }}</th>
+                            <th>{{ __('ui.analytics.table.visits') }}</th>
                         </tr>
                     </thead>
                     <tbody>

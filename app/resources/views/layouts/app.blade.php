@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -291,27 +291,19 @@
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at top left, rgba(16,76,126,0.7), rgba(8,31,52,0.95) 55%) #0a2440;
-            border: 2px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.45);
             border-radius: 20px;
-            padding: 22px 26px;
+            padding: 24px 30px;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 10px 24px rgba(2,16,32,0.3);
+            box-shadow: 0 10px 24px rgba(2,16,32,0.3);
             overflow: hidden;
         }
         .flip-card-front {
             justify-content: center;
             gap: 16px;
-        }
-        .flip-card-face::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.35);
-            pointer-events: none;
         }
         .bonus-flame {
             position: absolute;
@@ -386,6 +378,7 @@
             flex-direction: column;
             align-items: flex-end;
             gap: 12px;
+            padding-right: 4px;
         }
         .bonus-row {
             display: grid;
@@ -428,6 +421,7 @@
             align-items: center;
             flex-wrap: wrap;
             justify-content: flex-end;
+            padding-right: 4px;
         }
         .bonus-actions-vertical {
             width: 100%;
@@ -475,9 +469,11 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
         .info-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
+            display: block;
+            shape-rendering: geometricPrecision;
         }
         .info-btn:hover {
             transform: translateY(-2px);
@@ -728,10 +724,14 @@
         <span>{{ $settings->get('site_name', 'BonusPilot') }}</span>
     </div>
     <div class="nav-primary">
-        <a href="{{ route('home') }}">Bonis</a>
-        <a href="{{ route('page.show', 'gluecksrad') }}">Glücksrad</a>
+        <a href="{{ route('home') }}">{{ __('ui.nav.bonuses') }}</a>
+        <a href="{{ route('page.show', 'gluecksrad') }}">{{ __('ui.nav.wheel') }}</a>
     </div>
     <nav class="nav-actions">
+        @php
+            $currentLocale = app()->getLocale();
+            $toggleLocale = $currentLocale === 'de' ? 'en' : 'de';
+        @endphp
         <div class="nav-socials">
             @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
                 @if($settings->get($social))
@@ -741,13 +741,19 @@
                 @endif
             @endforeach
         </div>
+        <form method="POST" action="{{ route('language.switch', $toggleLocale) }}" style="display:inline">
+            @csrf
+            <button class="btn btn-outline" type="submit" aria-label="{{ __('ui.language.switch') }}">
+                {{ strtoupper($toggleLocale) }}
+            </button>
+        </form>
         @auth
             @if(auth()->user()->is_admin)
-                <a href="{{ route('admin.bonuses.index') }}">Admin</a>
+                <a href="{{ route('admin.bonuses.index') }}">{{ __('ui.nav.admin') }}</a>
             @endif
             <form method="POST" action="{{ route('logout') }}" style="display:inline">
                 @csrf
-                <button class="btn btn-secondary" type="submit">Logout</button>
+                <button class="btn btn-secondary" type="submit">{{ __('ui.nav.logout') }}</button>
             </form>
         @endauth
     </nav>
@@ -757,12 +763,12 @@
     @if(auth()->user()->is_admin)
         <div style="background:#111827;color:#fff;">
             <div class="container" style="display:flex;gap:16px;flex-wrap:wrap;">
-                <a href="{{ route('admin.bonuses.index') }}" style="color:#fff;">Bonuses</a>
-                <a href="{{ route('admin.filters.index') }}" style="color:#fff;">Filters</a>
-                <a href="{{ route('admin.pages.index') }}" style="color:#fff;">Pages</a>
-                <a href="{{ route('admin.analytics.index') }}" style="color:#fff;">Analytics</a>
-                <a href="{{ route('admin.settings.edit') }}" style="color:#fff;">Settings</a>
-                <a href="{{ route('admin.backups.index') }}" style="color:#fff;">Backups</a>
+                <a href="{{ route('admin.bonuses.index') }}" style="color:#fff;">{{ __('ui.nav.bonuses_admin') }}</a>
+                <a href="{{ route('admin.filters.index') }}" style="color:#fff;">{{ __('ui.nav.filters') }}</a>
+                <a href="{{ route('admin.pages.index') }}" style="color:#fff;">{{ __('ui.nav.pages') }}</a>
+                <a href="{{ route('admin.analytics.index') }}" style="color:#fff;">{{ __('ui.nav.analytics') }}</a>
+                <a href="{{ route('admin.settings.edit') }}" style="color:#fff;">{{ __('ui.nav.settings') }}</a>
+                <a href="{{ route('admin.backups.index') }}" style="color:#fff;">{{ __('ui.nav.backups') }}</a>
             </div>
         </div>
     @endif

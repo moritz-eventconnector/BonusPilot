@@ -33,7 +33,7 @@ class BackupController extends Controller
     {
         Artisan::call('app:backup-db');
 
-        return redirect()->route('admin.backups.index')->with('status', 'Backup created.');
+        return redirect()->route('admin.backups.index')->with('status', __('ui.backups.created'));
     }
 
     public function restore(Request $request): RedirectResponse
@@ -44,6 +44,6 @@ class BackupController extends Controller
 
         Artisan::call('app:restore-backup', ['file' => $data['file']]);
 
-        return redirect()->route('admin.backups.index')->with('status', 'Backup restored.');
+        return redirect()->route('admin.backups.index')->with('status', __('ui.backups.restored'));
     }
 }

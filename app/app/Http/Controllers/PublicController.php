@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bonus;
-use App\Models\FilterGroup;
+use App\Models\FilterOption;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,11 +20,8 @@ class PublicController extends Controller
             $filterSlug = $legacyFilters[0];
         }
 
-        $groups = FilterGroup::with(['options' => function ($query) {
-            $query->where('is_active', true)->orderBy('sort_order');
-        }])
-            ->where('is_active', true)
-            ->orderBy('sort_order')
+        $options = FilterOption::where('is_active', true)
+            ->orderBy('name')
             ->get();
 
         $bonuses = Bonus::with('filterOptions')
@@ -39,7 +36,7 @@ class PublicController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return view('public.index', compact('groups', 'bonuses', 'filterSlug'));
+        return view('public.index', compact('options', 'bonuses', 'filterSlug'));
     }
 
     public function showBonus(string $slug): View

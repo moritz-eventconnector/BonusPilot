@@ -36,7 +36,7 @@ class PageController extends Controller
 
         Page::create($data);
 
-        return redirect()->route('admin.pages.index')->with('status', 'Page created.');
+        return redirect()->route('admin.pages.index')->with('status', __('ui.pages.created'));
     }
 
     public function edit(Page $page): View
@@ -56,14 +56,14 @@ class PageController extends Controller
 
         $page->update($data);
 
-        return redirect()->route('admin.pages.index')->with('status', 'Page updated.');
+        return redirect()->route('admin.pages.index')->with('status', __('ui.pages.updated'));
     }
 
     public function destroy(Page $page): RedirectResponse
     {
         $page->delete();
 
-        return redirect()->route('admin.pages.index')->with('status', 'Page deleted.');
+        return redirect()->route('admin.pages.index')->with('status', __('ui.pages.deleted'));
     }
 
     private function validateData(Request $request): array

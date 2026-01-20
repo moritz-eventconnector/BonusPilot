@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bonus;
-use App\Models\FilterGroup;
+use App\Models\FilterOption;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +27,9 @@ class BonusController extends Controller
 
     public function create(): View
     {
-        $groups = FilterGroup::with('options')->get();
+        $options = FilterOption::orderBy('name')->get();
 
-        return view('admin.bonuses.create', compact('groups'));
+        return view('admin.bonuses.create', compact('options'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -47,15 +47,15 @@ class BonusController extends Controller
         $this->handleIconUpload($request, $bonus);
         $bonus->filterOptions()->sync($request->input('filter_options', []));
 
-        return redirect()->route('admin.bonuses.index')->with('status', 'Bonus created.');
+        return redirect()->route('admin.bonuses.index')->with('status', __('ui.bonuses.created'));
     }
 
     public function edit(Bonus $bonus): View
     {
-        $groups = FilterGroup::with('options')->get();
+        $options = FilterOption::orderBy('name')->get();
         $selectedOptions = $bonus->filterOptions()->pluck('filter_option_id')->all();
 
-        return view('admin.bonuses.edit', compact('bonus', 'groups', 'selectedOptions'));
+        return view('admin.bonuses.edit', compact('bonus', 'options', 'selectedOptions'));
     }
 
     public function update(Request $request, Bonus $bonus): RedirectResponse
@@ -73,14 +73,14 @@ class BonusController extends Controller
         $this->handleIconUpload($request, $bonus);
         $bonus->filterOptions()->sync($request->input('filter_options', []));
 
-        return redirect()->route('admin.bonuses.index')->with('status', 'Bonus updated.');
+        return redirect()->route('admin.bonuses.index')->with('status', __('ui.bonuses.updated'));
     }
 
     public function destroy(Bonus $bonus): RedirectResponse
     {
         $bonus->delete();
 
-        return redirect()->route('admin.bonuses.index')->with('status', 'Bonus deleted.');
+        return redirect()->route('admin.bonuses.index')->with('status', __('ui.bonuses.deleted'));
     }
 
     public function reorder(Request $request)
@@ -120,7 +120,6 @@ class BonusController extends Controller
             'terms_url' => ['nullable', 'url'],
             'back_text' => ['nullable', 'string'],
             'payment_methods' => ['nullable', 'string'],
-            'sort_order' => ['nullable', 'integer'],
             'bonus_icon' => ['nullable', 'file', 'mimes:jpg,jpeg,png,svg', 'max:2048'],
         ]);
     }

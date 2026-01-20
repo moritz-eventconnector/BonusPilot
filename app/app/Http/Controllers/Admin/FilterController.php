@@ -15,11 +15,10 @@ class FilterController extends Controller
 {
     public function index(): View
     {
-        $groups = FilterGroup::with(['options' => function ($query) {
-            $query->orderBy('sort_order');
-        }])->orderBy('sort_order')->get();
+        $defaultGroup = $this->defaultGroup();
+        $options = FilterOption::orderBy('name')->get();
 
-        return view('admin.filters.index', compact('groups'));
+        return view('admin.filters.index', compact('options', 'defaultGroup'));
     }
 
     public function storeGroup(Request $request): RedirectResponse
@@ -38,7 +37,7 @@ class FilterController extends Controller
 
         FilterGroup::create($data);
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter group created.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.group_created'));
     }
 
     public function updateGroup(Request $request, FilterGroup $group): RedirectResponse
@@ -57,24 +56,24 @@ class FilterController extends Controller
 
         $group->update($data);
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter group updated.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.group_updated'));
     }
 
     public function destroyGroup(FilterGroup $group): RedirectResponse
     {
         $group->delete();
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter group deleted.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.group_deleted'));
     }
 
     public function storeOption(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'filter_group_id' => ['required', 'exists:filter_groups,id'],
             'name' => ['required', 'string', 'max:255'],
-            'sort_order' => ['nullable', 'integer'],
+            'filter_group_id' => ['nullable', 'exists:filter_groups,id'],
         ]);
 
+        $data['filter_group_id'] = $data['filter_group_id'] ?? $this->defaultGroup()->id;
         $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -84,17 +83,17 @@ class FilterController extends Controller
 
         FilterOption::create($data);
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter option created.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.option_created'));
     }
 
     public function updateOption(Request $request, FilterOption $option): RedirectResponse
     {
         $data = $request->validate([
-            'filter_group_id' => ['required', 'exists:filter_groups,id'],
             'name' => ['required', 'string', 'max:255'],
-            'sort_order' => ['nullable', 'integer'],
+            'filter_group_id' => ['nullable', 'exists:filter_groups,id'],
         ]);
 
+        $data['filter_group_id'] = $data['filter_group_id'] ?? $option->filter_group_id ?? $this->defaultGroup()->id;
         $data['slug'] = Str::slug($data['name']);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -104,13 +103,21 @@ class FilterController extends Controller
 
         $option->update($data);
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter option updated.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.option_updated'));
     }
 
     public function destroyOption(FilterOption $option): RedirectResponse
     {
         $option->delete();
 
-        return redirect()->route('admin.filters.index')->with('status', 'Filter option deleted.');
+        return redirect()->route('admin.filters.index')->with('status', __('ui.filters.option_deleted'));
+    }
+
+    private function defaultGroup(): FilterGroup
+    {
+        return FilterGroup::firstOrCreate(
+            ['slug' => 'default'],
+            ['name' => 'Default', 'is_active' => true, 'sort_order' => 0]
+        );
     }
 }
