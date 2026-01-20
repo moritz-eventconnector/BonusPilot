@@ -380,6 +380,7 @@
             gap: 12px;
             padding-right: 16px;
             padding-left: 8px;
+            padding-bottom: 12px;
         }
         .bonus-row {
             display: grid;

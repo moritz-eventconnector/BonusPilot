@@ -120,9 +120,6 @@
                     </div>
                 </div>
                 <div class="flip-card-face flip-card-back">
-                    @if($bonus->is_featured)
-                        <span class="bonus-flame" aria-hidden="true">🔥</span>
-                    @endif
                     <div class="bonus-back-layout">
                         <div class="bonus-back-details">
                             <div class="card-top">
