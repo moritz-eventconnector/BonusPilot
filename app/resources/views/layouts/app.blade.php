@@ -135,7 +135,7 @@
             color: #e2e8f0;
         }
         .btn {
-            display: inline-block;
+            display: inline-flex;
             background: linear-gradient(180deg, var(--brand-primary), #0ea5e9);
             color: #fff;
             padding: 10px 16px;
@@ -143,6 +143,10 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
+            font-size: 15px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
         }
