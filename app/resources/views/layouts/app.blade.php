@@ -27,6 +27,18 @@
             color: #e5e7eb;
             min-height: 100vh;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.06);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
         a { color: #e2e8f0; text-decoration: none; }
         header {
             background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%);
@@ -47,22 +59,20 @@
         .logo-name {
             font-size: 20px;
             letter-spacing: 0.03em;
-            padding: 6px 14px;
-            border-radius: 999px;
-            color: var(--brand-primary);
-            background: rgba(15, 23, 42, 0.45);
-            border: 1px solid rgba(148,163,184,0.3);
-            box-shadow: 0 8px 18px rgba(2, 16, 32, 0.35);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+            padding: 6px 4px;
+            border-radius: 8px;
+            color: #ffffff;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            text-shadow: 0 0 12px rgba(59, 130, 246, 0.7), 0 2px 6px rgba(15, 23, 42, 0.55);
         }
         .logo-name--highlight {
-            background: linear-gradient(120deg, #f8fafc 0%, var(--brand-primary) 45%, #f8fafc 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4), 0 2px 8px rgba(15, 23, 42, 0.45);
-            border-color: rgba(255,255,255,0.3);
-            background-color: rgba(15, 23, 42, 0.4);
+            color: #ffffff;
+            background: transparent;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            text-shadow: 0 0 14px rgba(59, 130, 246, 0.75), 0 2px 8px rgba(15, 23, 42, 0.55);
         }
         .logo img {
             height: 40px;
@@ -84,9 +94,9 @@
             border-radius: 999px;
         }
         .nav-link.is-active {
-            color: #0f172a;
-            background: #e0f2fe;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+            color: #f8fafc;
+            background: transparent;
+            box-shadow: inset 0 -2px 0 rgba(148, 163, 184, 0.5);
         }
         .admin-nav {
             display: flex;
