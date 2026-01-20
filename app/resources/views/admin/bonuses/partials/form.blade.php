@@ -123,6 +123,11 @@
             <input type="text" name="payment_methods" value="{{ old('payment_methods', $bonus->payment_methods ?? '') }}" placeholder="{{ __('ui.bonuses.form.placeholders.payment_methods') }}">
             <span class="form-help">{{ __('ui.bonuses.form.payment_methods_help') }}</span>
         </div>
+        <div class="form-group">
+            <label>{{ __('ui.bonuses.form.go_back_label') }}</label>
+            <input type="text" name="go_back_label" value="{{ old('go_back_label', $bonus->go_back_label ?? '') }}" placeholder="{{ __('ui.bonuses.form.placeholders.go_back_label') }}">
+            <span class="form-help">{{ __('ui.bonuses.form.go_back_label_help') }}</span>
+        </div>
     </div>
 </div>
 

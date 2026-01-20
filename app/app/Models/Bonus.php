@@ -32,6 +32,7 @@ class Bonus extends Model
         'terms_url',
         'back_text',
         'payment_methods',
+        'go_back_label',
         'bonus_icon_path',
         'is_active',
         'is_featured',

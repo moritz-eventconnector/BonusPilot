@@ -674,11 +674,12 @@
             }
             .bonus-brand {
                 padding-left: 0;
-                align-items: flex-start;
-                text-align: left;
+                align-items: center;
+                text-align: center;
             }
             .bonus-logo {
                 max-width: 140px;
+                margin: 0 auto;
             }
             .bonus-actions {
                 width: 100%;
