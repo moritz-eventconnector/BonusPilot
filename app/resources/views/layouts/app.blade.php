@@ -45,8 +45,14 @@
             color: #f8fafc;
         }
         .logo-name {
-            font-size: 18px;
-            letter-spacing: 0.02em;
+            font-size: 20px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.35);
+            border: 1px solid rgba(148,163,184,0.4);
+            box-shadow: 0 6px 16px rgba(2, 16, 32, 0.35);
         }
         .logo-name--highlight {
             background: linear-gradient(120deg, #f8fafc 0%, #93c5fd 35%, #fef3c7 50%, #f8fafc 70%, #93c5fd 100%);
@@ -54,6 +60,8 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 12px rgba(147, 197, 253, 0.4), 0 2px 8px rgba(15, 23, 42, 0.45);
+            border-color: rgba(255,255,255,0.4);
+            background-color: rgba(15, 23, 42, 0.4);
         }
         .logo img {
             height: 40px;
@@ -648,10 +656,10 @@
                 flex-wrap: wrap;
             }
             .logo-name {
-                font-size: 20px;
+                font-size: 24px;
             }
             .logo-name--highlight {
-                font-size: 22px;
+                font-size: 28px;
             }
             .nav-actions {
                 width: 100%;
@@ -663,15 +671,19 @@
                 flex-wrap: wrap;
             }
             .filters {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 6px;
-                gap: 8px;
+                justify-content: center;
+                overflow-x: visible;
+                padding-bottom: 8px;
+                gap: 10px;
+            }
+            .filter-label {
+                width: 100%;
+                text-align: center;
             }
             .filter-pill span {
-                min-width: 96px;
-                padding: 8px 12px;
-                font-size: 12px;
+                min-width: 110px;
+                padding: 10px 14px;
+                font-size: 13px;
             }
             .hero {
                 text-align: left;
