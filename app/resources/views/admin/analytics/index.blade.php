@@ -3,7 +3,21 @@
 @section('content')
     <div class="card">
         <h2 style="margin-top:0;">Analytics</h2>
-        <p style="margin:6px 0 0;color:#94a3b8;">Zeigt die letzten 30 Tage (ab {{ $since->format('d.m.Y') }}).</p>
+        <p style="margin:6px 0 0;color:#94a3b8;">
+            Zeitraum: {{ $start->format('d.m.Y') }} – {{ $end->format('d.m.Y') }}
+        </p>
+        <form method="GET" action="{{ route('admin.analytics.index') }}" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:end;">
+            <div class="form-group" style="margin:0;">
+                <label>Von</label>
+                <input type="date" name="from" value="{{ $start->format('Y-m-d') }}">
+            </div>
+            <div class="form-group" style="margin:0;">
+                <label>Bis</label>
+                <input type="date" name="to" value="{{ $end->format('Y-m-d') }}">
+            </div>
+            <button class="btn" type="submit">Zeitraum anwenden</button>
+            <a class="btn btn-secondary" href="{{ route('admin.analytics.index') }}">Zurücksetzen</a>
+        </form>
     </div>
 
     <div class="grid grid-3">

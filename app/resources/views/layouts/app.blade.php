@@ -301,6 +301,10 @@
             box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 10px 24px rgba(2,16,32,0.3);
             overflow: hidden;
         }
+        .flip-card-front {
+            justify-content: center;
+            gap: 16px;
+        }
         .flip-card-face::before {
             content: "";
             position: absolute;
@@ -404,10 +408,19 @@
             object-fit: contain;
         }
         .bonus-code {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.7);
+            color: #fde68a;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(250, 204, 21, 0.18);
+            border: 1px solid rgba(250, 204, 21, 0.5);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
         }
         .bonus-actions {
             display: flex;
@@ -551,6 +564,59 @@
             margin-bottom: 14px;
             font-size: 18px;
             color: #93c5fd;
+        }
+        .admin-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .admin-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .admin-card {
+            background: rgba(15, 23, 42, 0.75);
+            border-radius: 16px;
+            border: 1px solid rgba(148,163,184,0.3);
+            padding: 18px;
+        }
+        .admin-muted {
+            color: #94a3b8;
+        }
+        .form-help {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .form-note {
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px dashed rgba(148,163,184,0.4);
+            color: #cbd5f5;
+        }
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .checkbox-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(148,163,184,0.3);
+            background: rgba(15, 23, 42, 0.55);
+        }
+        .checkbox-pill input {
+            margin: 0;
         }
         @media (max-width: 768px) {
             .container {
