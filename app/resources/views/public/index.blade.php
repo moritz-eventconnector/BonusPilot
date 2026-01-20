@@ -137,7 +137,6 @@
                             @endif
                         </div>
                         <div class="bonus-back-actions">
-                            <button class="info-btn" type="button" data-flip aria-label="{{ __('ui.bonuses.back') }}">⟲</button>
                             @if(count($methods))
                                 <div class="payment-methods">
                                     <div class="payment-heading">
