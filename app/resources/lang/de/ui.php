@@ -223,6 +223,7 @@ return [
         'primary_color' => 'Primärfarbe',
         'secondary_color' => 'Sekundärfarbe',
         'background_color' => 'Hintergrundfarbe',
+        'header_background' => 'Kopfzeilenhintergrund',
         'background_image' => 'Hintergrundbild (optional)',
         'remove_background_image' => 'Hintergrundbild entfernen',
         'hero' => 'Homepage Hero',
