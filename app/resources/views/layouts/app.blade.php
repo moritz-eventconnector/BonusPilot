@@ -252,7 +252,7 @@
         footer {
             margin-top: 40px;
             padding: 24px;
-            background: linear-gradient(180deg, rgba(10,42,74,0.9), rgba(10,30,54,0.9));
+            background: var(--brand-header-bg);
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         .filters {
