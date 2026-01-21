@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -93,5 +95,18 @@ class PageController extends Controller
         }
 
         return response()->noContent();
+    }
+
+    public function uploadImage(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'image' => ['required', 'file', 'mimes:jpg,jpeg,png,webp,gif,svg', 'max:4096'],
+        ]);
+
+        $path = $data['image']->store('pages', 'public');
+
+        return response()->json([
+            'url' => asset('storage/' . $path),
+        ]);
     }
 }

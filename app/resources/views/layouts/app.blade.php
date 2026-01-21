@@ -255,6 +255,12 @@
             background: var(--brand-header-bg);
             border-top: 1px solid rgba(255,255,255,0.1);
         }
+        footer .container {
+            text-align: center;
+        }
+        footer .filters {
+            justify-content: center;
+        }
         .filters {
             display: flex;
             flex-wrap: wrap;
@@ -797,6 +803,8 @@
         'discord' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 5.4a18 18 0 0 0-4.4-1.4l-.2.4a13 13 0 0 1 3.8 1.7c-3.4-1.8-7.6-1.8-11 0a13 13 0 0 1 3.8-1.7l-.2-.4a18 18 0 0 0-4.4 1.4C4.8 8.7 3.6 11.8 4 15c2 1.5 4 2.4 6.1 2.9l.7-1.1a7.8 7.8 0 0 1-2.2-1.1l.5-.4a10 10 0 0 0 7.8 0l.5.4c-.7.5-1.4.9-2.2 1.1l.7 1.1c2.1-.5 4.1-1.4 6.1-2.9.5-3.2-.8-6.3-2.7-9.6zM9.6 13.4a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm4.8 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z"/></svg>',
         'tiktok' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.7 3c.5 1.7 1.9 3.1 3.6 3.6v3a7 7 0 0 1-3.6-1.2v5.7a5.4 5.4 0 1 1-5.4-5.4c.4 0 .8 0 1.2.1v3.1a2.4 2.4 0 1 0 1.8 2.3V3z"/></svg>',
         'youtube' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.5 7.2a3 3 0 0 0-2.1-2.1C18.5 4.5 12 4.5 12 4.5s-6.5 0-8.4.6A3 3 0 0 0 1.5 7.2 31 31 0 0 0 1 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.6 8.4.6 8.4.6s6.5 0 8.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23 12a31 31 0 0 0-.5-4.8zM10 15.5V8.5l6 3.5-6 3.5z"/></svg>',
+        'twitch' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16v11l-4 4h-4l-2 2h-2v-2H4V3zm14 9V5H6v11h4v2l2-2h4l2-2z" fill="currentColor"/></svg>',
+        'kick' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v4H9v4h6v4H9v2H5V3zm10 4h4v10h-4V7z" fill="currentColor"/></svg>',
     ];
 @endphp
 <header>
@@ -814,7 +822,7 @@
     </div>
     <nav class="nav-actions">
         <div class="nav-socials">
-            @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
+            @foreach(['instagram','telegram','discord','tiktok','youtube','twitch','kick'] as $social)
                 @if($settings->get($social))
                     <a class="social-icon" href="{{ $settings->get($social) }}" target="_blank" aria-label="{{ ucfirst($social) }}">
                         {!! $socialIcons[$social] !!}
@@ -874,7 +882,7 @@
     <div class="container">
         <strong>{{ $settings->get('site_name', 'BonusPilot') }}</strong>
         <div class="filters" style="margin-top:12px;">
-            @foreach(['instagram','telegram','discord','tiktok','youtube'] as $social)
+            @foreach(['instagram','telegram','discord','tiktok','youtube','twitch','kick'] as $social)
                 @if($settings->get($social))
                     <a class="social-icon" href="{{ $settings->get($social) }}" target="_blank" aria-label="{{ ucfirst($social) }}">
                         {!! $socialIcons[$social] !!}

@@ -115,7 +115,20 @@
         </div>
         <div class="form-group">
             <label>{{ __('ui.bonuses.form.payment_methods') }}</label>
-            <input type="text" name="payment_methods" value="{{ old('payment_methods', $bonus->payment_methods ?? '') }}" placeholder="{{ __('ui.bonuses.form.placeholders.payment_methods') }}">
+            @php
+                $paymentOptions = \App\Models\Bonus::PAYMENT_METHODS;
+                $selectedPaymentMethods = old('payment_methods', $bonus->payment_methods ? $bonus->paymentMethodsList() : []);
+            @endphp
+            <div class="checkbox-grid">
+                @foreach($paymentOptions as $paymentOption)
+                    <label class="checkbox-pill">
+                        <input type="checkbox" name="payment_methods[]"
+                               value="{{ $paymentOption }}"
+                               {{ in_array($paymentOption, $selectedPaymentMethods, true) ? 'checked' : '' }}>
+                        {{ $paymentOption }}
+                    </label>
+                @endforeach
+            </div>
             <span class="form-help">{{ __('ui.bonuses.form.payment_methods_help') }}</span>
         </div>
         <div class="form-group">

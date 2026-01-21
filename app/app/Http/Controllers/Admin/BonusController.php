@@ -35,6 +35,7 @@ class BonusController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validateData($request);
+        $data['payment_methods'] = $this->serializePaymentMethods($data['payment_methods'] ?? null);
         $data['slug'] = Str::slug($data['title']);
         $data['is_active'] = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
@@ -61,6 +62,7 @@ class BonusController extends Controller
     public function update(Request $request, Bonus $bonus): RedirectResponse
     {
         $data = $this->validateData($request, $bonus->id);
+        $data['payment_methods'] = $this->serializePaymentMethods($data['payment_methods'] ?? null);
         $data['slug'] = Str::slug($data['title']);
         $data['is_active'] = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
@@ -118,10 +120,20 @@ class BonusController extends Controller
             'play_url' => ['nullable', 'url'],
             'terms_url' => ['nullable', 'url'],
             'back_text' => ['nullable', 'string'],
-            'payment_methods' => ['nullable', 'string'],
+            'payment_methods' => ['nullable', 'array'],
+            'payment_methods.*' => ['string', Rule::in(Bonus::PAYMENT_METHODS)],
             'go_back_label' => ['nullable', 'string', 'max:255'],
             'bonus_icon' => ['nullable', 'file', 'mimes:jpg,jpeg,png,svg', 'max:2048'],
         ]);
+    }
+
+    private function serializePaymentMethods(?array $methods): ?string
+    {
+        if (!$methods) {
+            return null;
+        }
+
+        return json_encode(array_values($methods), JSON_UNESCAPED_UNICODE);
     }
 
     private function handleIconUpload(Request $request, Bonus $bonus): void

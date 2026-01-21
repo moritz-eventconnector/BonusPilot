@@ -85,6 +85,14 @@
                 <label>YouTube</label>
                 <input type="url" name="youtube" value="{{ old('youtube', $settings->get('youtube')) }}">
             </div>
+            <div class="form-group">
+                <label>Twitch</label>
+                <input type="url" name="twitch" value="{{ old('twitch', $settings->get('twitch')) }}">
+            </div>
+            <div class="form-group">
+                <label>Kick</label>
+                <input type="url" name="kick" value="{{ old('kick', $settings->get('kick')) }}">
+            </div>
         </div>
         <button class="btn" type="submit">{{ __('ui.settings.save') }}</button>
     </form>
