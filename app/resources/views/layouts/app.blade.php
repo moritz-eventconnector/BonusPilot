@@ -607,19 +607,38 @@
             height: 20px;
         }
         .editor-columns {
+            --column-count: 2;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
             gap: 16px;
             align-items: start;
             margin: 12px 0;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px dashed rgba(148,163,184,0.3);
         }
         .editor-column {
             min-height: 60px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px dashed rgba(148,163,184,0.25);
+            background: rgba(15, 23, 42, 0.4);
         }
         .editor-column img {
             max-width: 100%;
             height: auto;
             display: block;
+        }
+        .editor-columns--guides {
+            background-image: linear-gradient(90deg, rgba(148,163,184,0.18) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(148,163,184,0.18) 1px, transparent 1px);
+            background-size: 32px 32px;
+            background-position: -1px -1px;
+        }
+        .editor-columns--guides .editor-column {
+            border-color: rgba(125, 211, 252, 0.6);
+            background: rgba(30, 41, 59, 0.6);
+            box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.35);
         }
         .form-section {
             padding: 18px;
