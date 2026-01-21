@@ -17,7 +17,6 @@ class BonusController extends Controller
     public function index(): View
     {
         $bonuses = Bonus::with('filterOptions')
-            ->orderByDesc('is_featured')
             ->orderBy('sort_order')
             ->orderByDesc('created_at')
             ->get();
