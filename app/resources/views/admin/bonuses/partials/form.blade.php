@@ -119,13 +119,14 @@
                 $paymentOptions = \App\Models\Bonus::PAYMENT_METHODS;
                 $selectedPaymentMethods = old('payment_methods', $bonus->payment_methods ? $bonus->paymentMethodsList() : []);
             @endphp
-            <div class="checkbox-grid">
+            <div class="payment-options">
                 @foreach($paymentOptions as $paymentOption)
-                    <label class="checkbox-pill">
+                    <label class="payment-option">
                         <input type="checkbox" name="payment_methods[]"
                                value="{{ $paymentOption }}"
                                {{ in_array($paymentOption, $selectedPaymentMethods, true) ? 'checked' : '' }}>
-                        {{ $paymentOption }}
+                        <span class="payment-option-label">{{ $paymentOption }}</span>
+                        <span class="payment-option-check">✓</span>
                     </label>
                 @endforeach
             </div>

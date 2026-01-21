@@ -32,6 +32,22 @@
         <div class="wysiwyg-editor" data-editor contenteditable="true" style="min-height:180px;padding:12px;border:1px solid #374151;border-radius:8px;background:#0f172a;color:#e5e7eb;">
             {!! old('content', $page->content ?? '') !!}
         </div>
+        <div class="editor-image-controls" data-image-controls hidden>
+            <div class="editor-image-group">
+                <span class="editor-image-label">{{ __('ui.pages.editor.image_size') }}</span>
+                <input type="range" min="20" max="100" value="100" data-image-size>
+                <span class="editor-image-value" data-image-size-value>100%</span>
+            </div>
+            <div class="editor-image-group">
+                <span class="editor-image-label">{{ __('ui.pages.editor.image_align') }}</span>
+                <button type="button" class="btn btn-outline btn-sm" data-image-align="left">{{ __('ui.pages.editor.align_left') }}</button>
+                <button type="button" class="btn btn-outline btn-sm" data-image-align="center">{{ __('ui.pages.editor.align_center') }}</button>
+                <button type="button" class="btn btn-outline btn-sm" data-image-align="right">{{ __('ui.pages.editor.align_right') }}</button>
+            </div>
+            <div class="editor-image-group">
+                <button type="button" class="btn btn-secondary btn-sm" data-image-remove>{{ __('ui.pages.editor.remove_image') }}</button>
+            </div>
+        </div>
         <textarea name="content" data-editor-input hidden required>{{ old('content', $page->content ?? '') }}</textarea>
         <p style="margin-top:8px;color:#94a3b8;">{{ __('ui.pages.form.content_help') }}</p>
     </div>
@@ -52,6 +68,12 @@
     const uploadButton = document.querySelector('[data-command="insertImage"]');
     const uploadInput = document.querySelector('[data-editor-upload]');
     const uploadUrl = @json(route('admin.pages.upload-image'));
+    const imageControls = document.querySelector('[data-image-controls]');
+    const imageSizeInput = document.querySelector('[data-image-size]');
+    const imageSizeValue = document.querySelector('[data-image-size-value]');
+    const imageAlignButtons = document.querySelectorAll('[data-image-align]');
+    const imageRemoveButton = document.querySelector('[data-image-remove]');
+    let selectedImage = null;
 
     if (editor && editorInput) {
         const linkPrompt = @json(__('ui.pages.editor.link_prompt'));
@@ -62,6 +84,50 @@
 
         const syncEditor = () => {
             editorInput.value = editor.innerHTML;
+        };
+
+        const updateImageSize = (value) => {
+            if (!selectedImage) {
+                return;
+            }
+            selectedImage.style.width = `${value}%`;
+            selectedImage.style.height = 'auto';
+            imageSizeValue.textContent = `${value}%`;
+            syncEditor();
+        };
+
+        const updateImageAlignment = (alignment) => {
+            if (!selectedImage) {
+                return;
+            }
+            selectedImage.classList.remove('align-left', 'align-center', 'align-right');
+            selectedImage.classList.add(`align-${alignment}`);
+            syncEditor();
+        };
+
+        const showImageControls = (image) => {
+            selectedImage = image;
+            if (!imageControls || !imageSizeInput || !imageSizeValue) {
+                return;
+            }
+            const editorWidth = editor.getBoundingClientRect().width || 1;
+            const widthStyle = image.style.width;
+            let currentWidth = 100;
+            if (widthStyle?.includes('%')) {
+                currentWidth = Math.min(100, Math.max(20, parseInt(widthStyle, 10)));
+            } else if (image.width) {
+                currentWidth = Math.min(100, Math.max(20, Math.round((image.width / editorWidth) * 100)));
+            }
+            imageSizeInput.value = currentWidth.toString();
+            imageSizeValue.textContent = `${currentWidth}%`;
+            imageControls.hidden = false;
+        };
+
+        const hideImageControls = () => {
+            selectedImage = null;
+            if (imageControls) {
+                imageControls.hidden = true;
+            }
         };
 
         toolbarButtons.forEach((button) => {
@@ -134,6 +200,51 @@
                 }
             });
         }
+
+        if (imageSizeInput) {
+            imageSizeInput.addEventListener('input', (event) => {
+                const value = parseInt(event.target.value, 10);
+                if (!Number.isNaN(value)) {
+                    updateImageSize(value);
+                }
+            });
+        }
+
+        if (imageAlignButtons.length) {
+            imageAlignButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    updateImageAlignment(button.dataset.imageAlign);
+                });
+            });
+        }
+
+        if (imageRemoveButton) {
+            imageRemoveButton.addEventListener('click', () => {
+                if (!selectedImage) {
+                    return;
+                }
+                selectedImage.remove();
+                hideImageControls();
+                syncEditor();
+            });
+        }
+
+        editor.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target && target.tagName === 'IMG') {
+                showImageControls(target);
+                return;
+            }
+            if (!event.target.closest('[data-image-controls]')) {
+                hideImageControls();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!editor.contains(event.target) && !event.target.closest('[data-image-controls]')) {
+                hideImageControls();
+            }
+        });
 
         editor.addEventListener('input', syncEditor);
         editor.closest('form').addEventListener('submit', syncEditor);

@@ -215,6 +215,11 @@
         .btn-outline:hover {
             background: rgba(255,255,255,0.1);
         }
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
         .badge {
             display: inline-block;
             padding: 4px 8px;
@@ -681,6 +686,112 @@
         }
         .checkbox-pill input {
             margin: 0;
+        }
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .payment-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(148,163,184,0.28);
+            background: rgba(15, 23, 42, 0.6);
+            color: #e2e8f0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        }
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .payment-option-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .payment-option-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(148,163,184,0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: transparent;
+            background: rgba(15, 23, 42, 0.6);
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+        .payment-option:hover {
+            transform: translateY(-1px);
+            border-color: rgba(96,165,250,0.7);
+            box-shadow: 0 8px 16px rgba(2, 16, 32, 0.25);
+            background: rgba(30, 41, 59, 0.7);
+        }
+        .payment-option input:checked ~ .payment-option-check {
+            color: #0f172a;
+            border-color: rgba(125, 211, 252, 0.9);
+            background: linear-gradient(135deg, rgba(125, 211, 252, 0.9), rgba(96, 165, 250, 0.9));
+        }
+        .payment-option input:checked ~ .payment-option-label {
+            color: #e0f2fe;
+        }
+        .editor-image-controls {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148,163,184,0.35);
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .editor-image-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .editor-image-label {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .editor-image-controls input[type="range"] {
+            accent-color: #60a5fa;
+        }
+        .editor-image-value {
+            font-size: 12px;
+            color: #e2e8f0;
+            min-width: 40px;
+        }
+        .wysiwyg-editor img {
+            max-width: 100%;
+            height: auto;
+        }
+        .wysiwyg-editor img.align-left {
+            float: left;
+            margin: 0 14px 12px 0;
+        }
+        .wysiwyg-editor img.align-center {
+            display: block;
+            margin: 0 auto 12px;
+            float: none;
+        }
+        .wysiwyg-editor img.align-right {
+            float: right;
+            margin: 0 0 12px 14px;
         }
         @media (max-width: 768px) {
             .container {
