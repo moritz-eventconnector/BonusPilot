@@ -31,9 +31,7 @@ class PublicController extends Controller
                     $subQuery->where('slug', $filterSlug);
                 });
             })
-            ->orderByDesc('is_featured')
             ->orderBy('sort_order')
-            ->orderByDesc('created_at')
             ->get();
 
         return view('public.index', compact('options', 'bonuses', 'filterSlug'));
