@@ -39,6 +39,7 @@ class SettingsController extends Controller
             'youtube' => ['nullable', 'url'],
             'twitch' => ['nullable', 'url'],
             'kick' => ['nullable', 'url'],
+            'payment_methods_presets' => ['nullable', 'string', 'max:1000'],
         ]);
 
         if ($request->hasFile('logo')) {
@@ -95,6 +96,7 @@ class SettingsController extends Controller
             'youtube',
             'twitch',
             'kick',
+            'payment_methods_presets',
         ];
 
         foreach ($keys as $key) {

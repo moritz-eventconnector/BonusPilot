@@ -116,7 +116,7 @@
         <div class="form-group">
             <label>{{ __('ui.bonuses.form.payment_methods') }}</label>
             @php
-                $paymentOptions = \App\Models\Bonus::PAYMENT_METHODS;
+                $paymentOptions = \App\Models\Bonus::paymentMethodPresets();
                 $selectedPaymentMethods = old('payment_methods', $bonus->payment_methods ? $bonus->paymentMethodsList() : []);
             @endphp
             <div class="payment-options">
@@ -142,24 +142,29 @@
 
 <div class="form-section">
     <h3>{{ __('ui.bonuses.form.visibility') }}</h3>
-    <div class="grid grid-3">
-        <div class="form-group">
-            <label><input type="checkbox" name="is_active" value="1" {{ old('is_active', $bonus->is_active ?? true) ? 'checked' : '' }}> {{ __('ui.bonuses.form.is_active') }}</label>
-        </div>
-        <div class="form-group">
-            <label><input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $bonus->is_featured ?? false) ? 'checked' : '' }}> {{ __('ui.bonuses.form.is_featured') }}</label>
-        </div>
+    <div class="payment-options">
+        <label class="payment-option">
+            <input type="checkbox" name="is_active" value="1" {{ old('is_active', $bonus->is_active ?? true) ? 'checked' : '' }}>
+            <span class="payment-option-label">{{ __('ui.bonuses.form.is_active') }}</span>
+            <span class="payment-option-check">✓</span>
+        </label>
+        <label class="payment-option">
+            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $bonus->is_featured ?? false) ? 'checked' : '' }}>
+            <span class="payment-option-label">{{ __('ui.bonuses.form.is_featured') }}</span>
+            <span class="payment-option-check">✓</span>
+        </label>
     </div>
 </div>
 
 <div class="form-section">
     <h3>{{ __('ui.bonuses.form.filters') }}</h3>
-    <div class="checkbox-grid">
+    <div class="payment-options">
         @foreach($options as $option)
-            <label class="checkbox-pill">
+            <label class="payment-option">
                 <input type="checkbox" name="filter_options[]" value="{{ $option->id }}"
                     {{ in_array($option->id, old('filter_options', $selectedOptions ?? [])) ? 'checked' : '' }}>
-                {{ $option->name }}
+                <span class="payment-option-label">{{ $option->name }}</span>
+                <span class="payment-option-check">✓</span>
             </label>
         @endforeach
     </div>

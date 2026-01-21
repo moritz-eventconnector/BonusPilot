@@ -63,6 +63,18 @@
                 <input type="text" name="home_hero_subtitle" value="{{ old('home_hero_subtitle', $settings->get('home_hero_subtitle')) }}" placeholder="{{ __('ui.home.hero_subtitle_default') }}">
             </div>
         </div>
+        <h3>{{ __('ui.settings.bonuses') }}</h3>
+        <div class="form-group">
+            <label>{{ __('ui.settings.payment_methods_presets') }}</label>
+            @php
+                $paymentMethodsPresetValue = old(
+                    'payment_methods_presets',
+                    $settings->get('payment_methods_presets', implode(', ', \App\Models\Bonus::DEFAULT_PAYMENT_METHODS))
+                );
+            @endphp
+            <textarea name="payment_methods_presets" rows="3" placeholder="{{ __('ui.settings.payment_methods_presets_placeholder') }}">{{ $paymentMethodsPresetValue }}</textarea>
+            <span class="form-help">{{ __('ui.settings.payment_methods_presets_help') }}</span>
+        </div>
         <h3>{{ __('ui.settings.social') }}</h3>
         <div class="grid grid-3">
             <div class="form-group">

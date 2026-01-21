@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Arr;
 
 class Bonus extends Model
 {
     use HasFactory;
 
-    public const PAYMENT_METHODS = [
+    public const DEFAULT_PAYMENT_METHODS = [
         'Visa',
         'MasterCard',
         'PayPal',
@@ -56,6 +57,29 @@ class Bonus extends Model
         'bonus_percent' => 'integer',
         'sort_order' => 'integer',
     ];
+
+    public static function paymentMethodPresets(): array
+    {
+        $setting = Setting::where('key', 'payment_methods_presets')->value('value');
+
+        if ($setting !== null) {
+            return self::parsePaymentMethods($setting);
+        }
+
+        return self::DEFAULT_PAYMENT_METHODS;
+    }
+
+    public static function parsePaymentMethods(?string $value): array
+    {
+        if (!$value) {
+            return [];
+        }
+
+        $normalized = str_replace(["\r\n", "\r"], "\n", $value);
+        $parts = preg_split('/[,\n]+/', $normalized) ?: [];
+
+        return array_values(array_filter(Arr::map($parts, fn ($part) => trim($part))));
+    }
 
     public function paymentMethodsList(): array
     {
