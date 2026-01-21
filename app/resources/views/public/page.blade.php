@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="card">
-    <h1>{{ $page->title }}</h1>
+    <h1 class="page-title page-title--{{ $page->title_alignment ?? 'left' }}">{{ $page->title }}</h1>
     <div>{!! $page->content !!}</div>
 </div>
 @endsection

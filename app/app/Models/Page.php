@@ -14,6 +14,7 @@ class Page extends Model
         'slug',
         'status',
         'content',
+        'title_alignment',
         'seo_title',
         'seo_description',
         'nav_order',

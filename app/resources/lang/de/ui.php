@@ -190,6 +190,10 @@ return [
         ],
         'form' => [
             'title' => 'Titel',
+            'title_alignment' => 'Titel-Ausrichtung',
+            'title_alignment_left' => 'Linksbündig',
+            'title_alignment_center' => 'Zentriert',
+            'title_alignment_right' => 'Rechtsbündig',
             'slug' => 'Slug',
             'slug_help' => 'Leer lassen, um den Slug automatisch aus dem Titel zu erzeugen.',
             'status' => 'Status',

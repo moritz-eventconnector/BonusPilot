@@ -41,6 +41,18 @@
             z-index: 1;
         }
         a { color: #e2e8f0; text-decoration: none; }
+        .page-title {
+            margin-top: 0;
+        }
+        .page-title--left {
+            text-align: left;
+        }
+        .page-title--center {
+            text-align: center;
+        }
+        .page-title--right {
+            text-align: right;
+        }
         header {
             background: var(--brand-header-bg);
             border-bottom: 1px solid rgba(255,255,255,0.1);

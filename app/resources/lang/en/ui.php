@@ -190,6 +190,10 @@ return [
         ],
         'form' => [
             'title' => 'Title',
+            'title_alignment' => 'Title alignment',
+            'title_alignment_left' => 'Left',
+            'title_alignment_center' => 'Center',
+            'title_alignment_right' => 'Right',
             'slug' => 'Slug',
             'slug_help' => 'Leave blank to auto-generate the slug from the title.',
             'status' => 'Status',
