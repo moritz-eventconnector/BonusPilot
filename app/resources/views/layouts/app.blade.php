@@ -613,29 +613,33 @@
             gap: 16px;
             align-items: start;
             margin: 12px 0;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px dashed rgba(148,163,184,0.3);
         }
         .editor-column {
             min-height: 60px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px dashed rgba(148,163,184,0.25);
-            background: rgba(15, 23, 42, 0.4);
         }
         .editor-column img {
             max-width: 100%;
             height: auto;
             display: block;
         }
-        .editor-columns--guides {
+        .admin-view .editor-columns {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px dashed rgba(148,163,184,0.3);
+        }
+        .admin-view .editor-column {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px dashed rgba(148,163,184,0.25);
+            background: rgba(15, 23, 42, 0.4);
+        }
+        .admin-view .editor-columns--guides {
             background-image: linear-gradient(90deg, rgba(148,163,184,0.18) 1px, transparent 1px),
                 linear-gradient(180deg, rgba(148,163,184,0.18) 1px, transparent 1px);
             background-size: 32px 32px;
             background-position: -1px -1px;
         }
-        .editor-columns--guides .editor-column {
+        .admin-view .editor-columns--guides .editor-column {
             border-color: rgba(125, 211, 252, 0.6);
             background: rgba(30, 41, 59, 0.6);
             box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.35);
@@ -925,7 +929,7 @@
         }
     </style>
 </head>
-<body>
+<body class="{{ request()->routeIs('admin.*') ? 'admin-view' : '' }}">
 @php
     $socialIcons = [
         'instagram' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7zm11 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-6 2.5a4.5 4.5 0 1 1 0 9a4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5a2.5 2.5 0 0 0 0-5z"/></svg>',
