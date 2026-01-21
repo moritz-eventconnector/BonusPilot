@@ -49,6 +49,7 @@
             draggingRow = event.currentTarget;
             draggingRow.classList.add('dragging');
             event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', draggingRow.dataset.id ?? '');
         };
 
         const handleDragOver = (event) => {
@@ -65,7 +66,8 @@
             }
         };
 
-        const handleDrop = async () => {
+        const handleDrop = async (event) => {
+            event.preventDefault();
             const order = getRows().map((row) => Number(row.dataset.id));
             const token = document.querySelector('meta[name="csrf-token"]')?.content;
             await fetch("{{ route('admin.bonuses.reorder') }}", {

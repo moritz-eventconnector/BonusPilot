@@ -42,6 +42,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::resource('pages', PageController::class)->except(['show']);
     Route::post('pages/reorder', [PageController::class, 'reorder'])->name('pages.reorder');
+    Route::post('pages/upload-image', [PageController::class, 'uploadImage'])->name('pages.upload-image');
 
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 

@@ -56,7 +56,7 @@
 <div class="bonus-grid">
     @forelse($bonuses as $bonus)
         @php
-            $methods = array_filter(array_map('trim', explode(',', $bonus->payment_methods ?? '')));
+            $methods = $bonus->paymentMethodsList();
             $metricLabels = [
                 'bonus_percent' => $bonus->bonus_percent_label ?: __('ui.bonuses.labels.bonus'),
                 'max_bonus' => $bonus->max_bonus_label ?: __('ui.bonuses.labels.max_bonus'),

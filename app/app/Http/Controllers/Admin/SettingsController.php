@@ -37,10 +37,17 @@ class SettingsController extends Controller
             'discord' => ['nullable', 'url'],
             'tiktok' => ['nullable', 'url'],
             'youtube' => ['nullable', 'url'],
+            'twitch' => ['nullable', 'url'],
+            'kick' => ['nullable', 'url'],
         ]);
 
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->storeAs('brand', 'logo.png', 'public');
+            $existingLogo = Setting::where('key', 'logo_path')->value('value');
+            if ($existingLogo && Storage::disk('public')->exists($existingLogo)) {
+                Storage::disk('public')->delete($existingLogo);
+            }
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $path = $request->file('logo')->storeAs('brand', 'logo-' . time() . '.' . $extension, 'public');
             Setting::updateOrCreate(['key' => 'logo_path'], ['value' => $path]);
         }
 
@@ -86,6 +93,8 @@ class SettingsController extends Controller
             'discord',
             'tiktok',
             'youtube',
+            'twitch',
+            'kick',
         ];
 
         foreach ($keys as $key) {

@@ -24,9 +24,11 @@
             <button class="btn btn-outline" type="button" data-command="insertUnorderedList">{{ __('ui.pages.editor.list') }}</button>
             <button class="btn btn-outline" type="button" data-command="insertOrderedList">{{ __('ui.pages.editor.numbered') }}</button>
             <button class="btn btn-outline" type="button" data-command="createLink">{{ __('ui.pages.editor.link') }}</button>
+            <button class="btn btn-outline" type="button" data-command="insertImage">{{ __('ui.pages.editor.image') }}</button>
             <button class="btn btn-outline" type="button" data-command="insertColumns">{{ __('ui.pages.editor.columns') }}</button>
             <button class="btn btn-secondary" type="button" data-command="removeFormat">{{ __('ui.pages.editor.clear') }}</button>
         </div>
+        <input type="file" accept="image/*" data-editor-upload hidden>
         <div class="wysiwyg-editor" data-editor contenteditable="true" style="min-height:180px;padding:12px;border:1px solid #374151;border-radius:8px;background:#0f172a;color:#e5e7eb;">
             {!! old('content', $page->content ?? '') !!}
         </div>
@@ -47,6 +49,9 @@
     const editor = document.querySelector('[data-editor]');
     const editorInput = document.querySelector('[data-editor-input]');
     const toolbarButtons = document.querySelectorAll('[data-command]');
+    const uploadButton = document.querySelector('[data-command="insertImage"]');
+    const uploadInput = document.querySelector('[data-editor-upload]');
+    const uploadUrl = @json(route('admin.pages.upload-image'));
 
     if (editor && editorInput) {
         const linkPrompt = @json(__('ui.pages.editor.link_prompt'));
@@ -87,10 +92,48 @@
                     syncEditor();
                     return;
                 }
+                if (command === 'insertImage') {
+                    uploadInput?.click();
+                    return;
+                }
                 document.execCommand(command, false, null);
                 editor.focus();
             });
         });
+
+        if (uploadButton && uploadInput) {
+            uploadInput.addEventListener('change', async () => {
+                const file = uploadInput.files?.[0];
+                if (!file) {
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('image', file);
+                const token = document.querySelector('meta[name="csrf-token"]')?.content;
+                try {
+                    const response = await fetch(uploadUrl, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': token ?? '',
+                        },
+                        body: formData,
+                    });
+                    if (!response.ok) {
+                        throw new Error('Upload failed');
+                    }
+                    const data = await response.json();
+                    if (data?.url) {
+                        document.execCommand('insertImage', false, data.url);
+                    }
+                } catch (error) {
+                    alert('Image upload failed.');
+                } finally {
+                    uploadInput.value = '';
+                    editor.focus();
+                    editorInput.value = editor.innerHTML;
+                }
+            });
+        }
 
         editor.addEventListener('input', syncEditor);
         editor.closest('form').addEventListener('submit', syncEditor);

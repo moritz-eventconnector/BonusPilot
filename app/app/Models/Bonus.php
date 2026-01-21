@@ -10,6 +10,18 @@ class Bonus extends Model
 {
     use HasFactory;
 
+    public const PAYMENT_METHODS = [
+        'Visa',
+        'MasterCard',
+        'PayPal',
+        'Skrill',
+        'Bitcoin',
+        'Litecoin',
+        'Ethereum',
+        'Paysafecard',
+        'Sofort',
+    ];
+
     protected $fillable = [
         'title',
         'slug',
@@ -44,6 +56,24 @@ class Bonus extends Model
         'bonus_percent' => 'integer',
         'sort_order' => 'integer',
     ];
+
+    public function paymentMethodsList(): array
+    {
+        if (!$this->payment_methods) {
+            return [];
+        }
+
+        if (is_array($this->payment_methods)) {
+            return array_values(array_filter($this->payment_methods));
+        }
+
+        $decoded = json_decode($this->payment_methods, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            return array_values(array_filter($decoded));
+        }
+
+        return array_values(array_filter(array_map('trim', explode(',', $this->payment_methods))));
+    }
 
     public function filterOptions(): BelongsToMany
     {
