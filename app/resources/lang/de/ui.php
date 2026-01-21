@@ -221,6 +221,7 @@ return [
             'font_size_2xl' => '2XL',
             'font_size_3xl' => '3XL',
             'text_color' => 'Textfarbe',
+            'text_align' => 'Textausrichtung',
             'image_size' => 'Bildgröße',
             'image_align' => 'Ausrichten',
             'align_left' => 'Links',
