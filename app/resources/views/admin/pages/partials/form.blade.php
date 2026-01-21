@@ -3,6 +3,17 @@
     <input type="text" name="title" value="{{ old('title', $page->title ?? '') }}" required>
 </div>
 <div class="form-group">
+    <label>{{ __('ui.pages.form.title_alignment') }}</label>
+    <select name="title_alignment">
+        @php
+            $selectedAlignment = old('title_alignment', $page->title_alignment ?? 'left');
+        @endphp
+        <option value="left" {{ $selectedAlignment === 'left' ? 'selected' : '' }}>{{ __('ui.pages.form.title_alignment_left') }}</option>
+        <option value="center" {{ $selectedAlignment === 'center' ? 'selected' : '' }}>{{ __('ui.pages.form.title_alignment_center') }}</option>
+        <option value="right" {{ $selectedAlignment === 'right' ? 'selected' : '' }}>{{ __('ui.pages.form.title_alignment_right') }}</option>
+    </select>
+</div>
+<div class="form-group">
     <label>{{ __('ui.pages.form.slug') }}</label>
     <input type="text" name="slug" value="{{ old('slug', $page->slug ?? '') }}">
     <p style="margin-top:8px;color:#94a3b8;">{{ __('ui.pages.form.slug_help') }}</p>

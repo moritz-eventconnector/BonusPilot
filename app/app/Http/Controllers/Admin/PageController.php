@@ -78,6 +78,7 @@ class PageController extends Controller
             'slug' => ['nullable', 'string', 'max:255'],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'content' => ['required', 'string'],
+            'title_alignment' => ['required', Rule::in(['left', 'center', 'right'])],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:255'],
         ]);
