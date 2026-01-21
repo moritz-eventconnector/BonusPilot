@@ -25,6 +25,12 @@
             <button class="btn btn-outline" type="button" data-command="insertOrderedList">{{ __('ui.pages.editor.numbered') }}</button>
             <button class="btn btn-outline" type="button" data-command="createLink">{{ __('ui.pages.editor.link') }}</button>
             <button class="btn btn-outline" type="button" data-command="insertImage">{{ __('ui.pages.editor.image') }}</button>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#cbd5f5;">
+                {{ __('ui.pages.editor.text_align') }}
+                <button class="btn btn-outline btn-sm" type="button" data-command="justifyLeft">{{ __('ui.pages.editor.align_left') }}</button>
+                <button class="btn btn-outline btn-sm" type="button" data-command="justifyCenter">{{ __('ui.pages.editor.align_center') }}</button>
+                <button class="btn btn-outline btn-sm" type="button" data-command="justifyRight">{{ __('ui.pages.editor.align_right') }}</button>
+            </span>
             <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#cbd5f5;">
                 {{ __('ui.pages.editor.font_size') }}
                 <select data-font-size data-command="fontSize" style="min-width:80px;">
