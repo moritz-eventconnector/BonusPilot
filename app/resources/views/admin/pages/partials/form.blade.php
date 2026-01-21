@@ -88,7 +88,7 @@
 <script>
     const editor = document.querySelector('[data-editor]');
     const editorInput = document.querySelector('[data-editor-input]');
-    const toolbarButtons = document.querySelectorAll('[data-command]');
+    const toolbarButtons = document.querySelectorAll('button[data-command]');
     const uploadButton = document.querySelector('[data-command="insertImage"]');
     const uploadInput = document.querySelector('[data-editor-upload]');
     const fontSizeSelect = document.querySelector('[data-font-size]');
@@ -216,8 +216,19 @@
                 if (command === 'insertColumns') {
                     const countValue = parseInt(columnsCountSelect?.value ?? '2', 10);
                     const columnsCount = Number.isNaN(countValue) ? 2 : Math.min(4, Math.max(2, countValue));
-                    const columnsMarkup = buildColumnsMarkup(columnsCount);
+                    const markerId = `columns-break-${Date.now()}`;
+                    const columnsMarkup = `${buildColumnsMarkup(columnsCount)}<p data-columns-break="${markerId}"><br></p>`;
                     document.execCommand('insertHTML', false, columnsMarkup);
+                    const breakNode = editor.querySelector(`[data-columns-break="${markerId}"]`);
+                    if (breakNode) {
+                        breakNode.removeAttribute('data-columns-break');
+                        const range = document.createRange();
+                        range.selectNodeContents(breakNode);
+                        range.collapse(true);
+                        const selection = window.getSelection();
+                        selection?.removeAllRanges();
+                        selection?.addRange(range);
+                    }
                     editor.focus();
                     syncEditor();
                     updateColumnGuides();
