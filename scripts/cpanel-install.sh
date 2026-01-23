@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_DIR="${APP_DIR:-}"
 SEED="${SEED:-false}"
+ADMIN_NAME="${ADMIN_NAME:-}"
+ADMIN_EMAIL="${ADMIN_EMAIL:-}"
+ADMIN_PASSWORD="${ADMIN_PASSWORD:-}"
 
 if [[ -z "${APP_DIR}" ]]; then
   if [[ -d "${ROOT_DIR}/app" && -f "${ROOT_DIR}/app/artisan" ]]; then
@@ -58,6 +61,14 @@ php artisan migrate --force
 if [[ "${SEED}" == "true" ]]; then
   php artisan db:seed --force
 fi
+if [[ -n "${ADMIN_NAME}" && -n "${ADMIN_EMAIL}" && -n "${ADMIN_PASSWORD}" ]]; then
+  php artisan app:create-admin \
+    --name="${ADMIN_NAME}" \
+    --email="${ADMIN_EMAIL}" \
+    --password="${ADMIN_PASSWORD}"
+else
+  echo "Skipping admin creation (set ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD to create one)."
+fi
 php artisan storage:link
 
 cat <<'EOF'
@@ -69,5 +80,6 @@ Next steps:
 3) Set the document root to app/public (or public if app root).
 4) Add cron: * * * * * /usr/bin/php /home/<user>/bonuspilot/app/artisan schedule:run >> /dev/null 2>&1
 5) Optional seed: rerun with SEED=true to import demo data.
+6) Admin user: rerun with ADMIN_NAME/ADMIN_EMAIL/ADMIN_PASSWORD if needed.
 ----------------------------------------
 EOF
