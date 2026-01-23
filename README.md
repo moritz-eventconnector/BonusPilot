@@ -45,6 +45,7 @@ After install, access:
    ```
 6) **Set env values** in `app/.env`:
    - `APP_URL`, `DB_CONNECTION=mysql`, `DB_HOST=localhost`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+   - **Important:** run Composer from the **app root**, not `app/public` (e.g., `composer install` inside `~/bonuspilot/app`).
 7) **Optional demo data** (run once):
    ```bash
    SEED=true /bin/bash /home/<user>/bonuspilot/scripts/cpanel-install.sh
