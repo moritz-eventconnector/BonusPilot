@@ -31,7 +31,12 @@ class BackupController extends Controller
 
     public function store(): RedirectResponse
     {
-        Artisan::call('app:backup-db');
+        $status = Artisan::call('app:backup-db');
+        if ($status !== 0) {
+            return redirect()
+                ->route('admin.backups.index')
+                ->withErrors(['backup' => Artisan::output() ?: 'Backup failed.']);
+        }
 
         return redirect()->route('admin.backups.index')->with('status', __('ui.backups.created'));
     }
@@ -42,7 +47,12 @@ class BackupController extends Controller
             'file' => ['required', 'string'],
         ]);
 
-        Artisan::call('app:restore-backup', ['file' => $data['file']]);
+        $status = Artisan::call('app:restore-backup', ['file' => $data['file']]);
+        if ($status !== 0) {
+            return redirect()
+                ->route('admin.backups.index')
+                ->withErrors(['backup' => Artisan::output() ?: 'Restore failed.']);
+        }
 
         return redirect()->route('admin.backups.index')->with('status', __('ui.backups.restored'));
     }
