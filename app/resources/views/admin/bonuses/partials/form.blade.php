@@ -117,7 +117,7 @@
             <label>{{ __('ui.bonuses.form.payment_methods') }}</label>
             @php
                 $paymentOptions = \App\Models\Bonus::paymentMethodPresets();
-                $selectedPaymentMethods = old('payment_methods', $bonus->payment_methods ? $bonus->paymentMethodsList() : []);
+                $selectedPaymentMethods = old('payment_methods', $bonus?->payment_methods ? $bonus->paymentMethodsList() : []);
             @endphp
             <div class="payment-options">
                 @foreach($paymentOptions as $paymentOption)
