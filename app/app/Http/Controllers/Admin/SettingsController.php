@@ -32,6 +32,7 @@ class SettingsController extends Controller
             'site_title' => ['nullable', 'string', 'max:255'],
             'home_hero_title' => ['nullable', 'string', 'max:120'],
             'home_hero_subtitle' => ['nullable', 'string', 'max:255'],
+            'home_filter_all_label' => ['nullable', 'string', 'max:120'],
             'instagram' => ['nullable', 'url'],
             'telegram' => ['nullable', 'url'],
             'discord' => ['nullable', 'url'],
@@ -89,6 +90,7 @@ class SettingsController extends Controller
             'header_background',
             'home_hero_title',
             'home_hero_subtitle',
+            'home_filter_all_label',
             'instagram',
             'telegram',
             'discord',
@@ -109,6 +111,10 @@ class SettingsController extends Controller
         Setting::updateOrCreate(
             ['key' => 'home_hero_enabled'],
             ['value' => $request->boolean('home_hero_enabled') ? '1' : '0']
+        );
+        Setting::updateOrCreate(
+            ['key' => 'home_filter_all_enabled'],
+            ['value' => $request->boolean('home_filter_all_enabled') ? '1' : '0']
         );
 
         return redirect()->route('admin.settings.edit')->with('status', __('ui.settings.updated'));

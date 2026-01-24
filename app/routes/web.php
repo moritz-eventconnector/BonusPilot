@@ -36,6 +36,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('bonuses/reorder', [BonusController::class, 'reorder'])->name('bonuses.reorder');
 
     Route::get('filters', [FilterController::class, 'index'])->name('filters.index');
+    Route::post('filters/reorder', [FilterController::class, 'reorder'])->name('filters.reorder');
     Route::post('filters/options', [FilterController::class, 'storeOption'])->name('filters.options.store');
     Route::patch('filters/options/{option}', [FilterController::class, 'updateOption'])->name('filters.options.update');
     Route::delete('filters/options/{option}', [FilterController::class, 'destroyOption'])->name('filters.options.destroy');

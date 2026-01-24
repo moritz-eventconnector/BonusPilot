@@ -12,6 +12,16 @@
 </div>
 
 <div class="card">
+    @if($errors->any())
+        <div class="alert alert-error">
+            <strong>{{ __('ui.common.validation_error') }}</strong>
+            <ul style="margin:8px 0 0;padding-left:18px;">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('admin.bonuses.store') }}" enctype="multipart/form-data">
         @csrf
         @include('admin.bonuses.partials.form', ['bonus' => null, 'selectedOptions' => [], 'options' => $options])

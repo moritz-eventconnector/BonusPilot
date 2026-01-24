@@ -26,6 +26,7 @@ return [
         'yes' => 'Ja',
         'no' => 'Nein',
         'reset' => 'Zurücksetzen',
+        'validation_error' => 'Bitte überprüfe die markierten Pflichtfelder.',
     ],
     'auth' => [
         'title' => 'Admin Login',
@@ -150,6 +151,7 @@ return [
         'new_option' => 'Neue Option',
         'existing' => 'Bestehende Filter',
         'empty' => 'Noch keine Optionen vorhanden.',
+        'reorder_hint' => 'Nutze die Pfeile, um die Reihenfolge der Filter für die Startseite festzulegen.',
         'fields' => [
             'name' => 'Name',
             'active' => 'Aktiv',
@@ -158,6 +160,8 @@ return [
             'create' => 'Option erstellen',
             'save' => 'Option speichern',
             'delete' => 'Löschen',
+            'move_up' => 'Nach oben',
+            'move_down' => 'Nach unten',
         ],
         'group_created' => 'Filtergruppe erstellt.',
         'group_updated' => 'Filtergruppe aktualisiert.',
@@ -259,6 +263,8 @@ return [
         'hero_title' => 'Hero-Titel',
         'hero_subtitle' => 'Hero-Untertitel',
         'bonuses' => 'Bonis',
+        'filter_all_enabled' => '„Alle Boni“-Filter anzeigen',
+        'filter_all_label' => 'Label für „Alle Boni“',
         'payment_methods_presets' => 'Vorgaben für Zahlungsmethoden',
         'payment_methods_presets_placeholder' => 'Visa, MasterCard, PayPal',
         'payment_methods_presets_help' => 'Eine Zahlungsmethode pro Zeile oder mit Kommas trennen.',

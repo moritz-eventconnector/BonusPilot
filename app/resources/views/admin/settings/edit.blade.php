@@ -64,6 +64,15 @@
             </div>
         </div>
         <h3>{{ __('ui.settings.bonuses') }}</h3>
+        <div class="grid grid-3">
+            <div class="form-group">
+                <label><input type="checkbox" name="home_filter_all_enabled" value="1" {{ old('home_filter_all_enabled', $settings->get('home_filter_all_enabled', '1')) !== '0' ? 'checked' : '' }}> {{ __('ui.settings.filter_all_enabled') }}</label>
+            </div>
+            <div class="form-group">
+                <label>{{ __('ui.settings.filter_all_label') }}</label>
+                <input type="text" name="home_filter_all_label" value="{{ old('home_filter_all_label', $settings->get('home_filter_all_label')) }}" placeholder="{{ __('ui.home.filter_all') }}">
+            </div>
+        </div>
         <div class="form-group">
             <label>{{ __('ui.settings.payment_methods_presets') }}</label>
             @php

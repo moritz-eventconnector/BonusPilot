@@ -26,7 +26,7 @@ class BonusController extends Controller
 
     public function create(): View
     {
-        $options = FilterOption::orderBy('name')->get();
+        $options = FilterOption::orderBy('sort_order')->orderBy('name')->get();
 
         return view('admin.bonuses.create', compact('options'));
     }
@@ -52,7 +52,7 @@ class BonusController extends Controller
 
     public function edit(Bonus $bonus): View
     {
-        $options = FilterOption::orderBy('name')->get();
+        $options = FilterOption::orderBy('sort_order')->orderBy('name')->get();
         $selectedOptions = $bonus->filterOptions()->pluck('filter_option_id')->all();
 
         return view('admin.bonuses.edit', compact('bonus', 'options', 'selectedOptions'));

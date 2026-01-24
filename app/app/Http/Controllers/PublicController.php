@@ -21,6 +21,7 @@ class PublicController extends Controller
         }
 
         $options = FilterOption::where('is_active', true)
+            ->orderBy('sort_order')
             ->orderBy('name')
             ->get();
 

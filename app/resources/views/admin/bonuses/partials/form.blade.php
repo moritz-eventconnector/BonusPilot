@@ -5,6 +5,9 @@
             <label>{{ __('ui.bonuses.form.title') }}</label>
             <input type="text" name="title" value="{{ old('title', $bonus->title ?? '') }}" required>
             <span class="form-help">{{ __('ui.bonuses.form.title_help') }}</span>
+            @error('title')
+                <div class="form-error">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label>{{ __('ui.bonuses.form.casino_name') }}</label>

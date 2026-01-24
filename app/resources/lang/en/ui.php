@@ -26,6 +26,7 @@ return [
         'yes' => 'Yes',
         'no' => 'No',
         'reset' => 'Reset',
+        'validation_error' => 'Please check the required fields below.',
     ],
     'auth' => [
         'title' => 'Admin login',
@@ -150,6 +151,7 @@ return [
         'new_option' => 'New option',
         'existing' => 'Existing filters',
         'empty' => 'No options yet.',
+        'reorder_hint' => 'Use the arrows to set the filter order on the homepage.',
         'fields' => [
             'name' => 'Name',
             'active' => 'Active',
@@ -158,6 +160,8 @@ return [
             'create' => 'Create option',
             'save' => 'Save option',
             'delete' => 'Delete',
+            'move_up' => 'Move up',
+            'move_down' => 'Move down',
         ],
         'group_created' => 'Filter group created.',
         'group_updated' => 'Filter group updated.',
@@ -259,6 +263,8 @@ return [
         'hero_title' => 'Hero title',
         'hero_subtitle' => 'Hero subtitle',
         'bonuses' => 'Bonuses',
+        'filter_all_enabled' => 'Show “All bonuses” filter',
+        'filter_all_label' => 'Label for “All bonuses”',
         'payment_methods_presets' => 'Payment method presets',
         'payment_methods_presets_placeholder' => 'Visa, MasterCard, PayPal',
         'payment_methods_presets_help' => 'Enter one payment method per line or separate them with commas.',
