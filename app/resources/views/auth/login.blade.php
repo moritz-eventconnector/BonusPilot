@@ -17,7 +17,10 @@
             <input type="password" name="password" required>
         </div>
         <div class="form-group">
-            <label><input type="checkbox" name="remember"> {{ __('ui.auth.remember') }}</label>
+            <label class="remember-option">
+                <input type="checkbox" name="remember">
+                <span>{{ __('ui.auth.remember') }}</span>
+            </label>
         </div>
         <button class="btn" type="submit">{{ __('ui.auth.login') }}</button>
     </form>

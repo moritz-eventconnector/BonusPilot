@@ -16,7 +16,7 @@ class FilterController extends Controller
     public function index(): View
     {
         $defaultGroup = $this->defaultGroup();
-        $options = FilterOption::orderBy('name')->get();
+        $options = FilterOption::orderBy('sort_order')->orderBy('name')->get();
 
         return view('admin.filters.index', compact('options', 'defaultGroup'));
     }
@@ -111,6 +111,20 @@ class FilterController extends Controller
         $option->delete();
 
         return redirect()->route('admin.filters.index')->with('status', __('ui.filters.option_deleted'));
+    }
+
+    public function reorder(Request $request)
+    {
+        $data = $request->validate([
+            'order' => ['required', 'array'],
+            'order.*' => ['integer', 'exists:filter_options,id'],
+        ]);
+
+        foreach ($data['order'] as $index => $optionId) {
+            FilterOption::whereKey($optionId)->update(['sort_order' => $index]);
+        }
+
+        return response()->noContent();
     }
 
     private function defaultGroup(): FilterGroup

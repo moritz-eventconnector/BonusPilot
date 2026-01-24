@@ -8,6 +8,8 @@
     $defaultHeroTitle = __('ui.home.hero_title_default');
     $defaultHeroSubtitle = __('ui.home.hero_subtitle_default');
     $filterSlug = $filterSlug ?? null;
+    $allFilterLabel = $settings->get('home_filter_all_label') ?: __('ui.home.filter_all');
+    $showAllFilter = $settings->get('home_filter_all_enabled', '1') !== '0';
     $paymentIcons = [
         'visa' => '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 7h20v10H2z"/><path fill="#1a1f71" d="M2 7h20v10H2z"/><path fill="#fff" d="M7.2 15.6h-1.4l.9-5.1h1.4zm5.6-3.5c-.2-.7-.8-.9-1.4-.9-1 0-1.6.5-1.6 1.2 0 .9 1.3 1.1 1.3 1.6 0 .2-.2.4-.7.4-.4 0-.9-.1-1.2-.3l-.2.9c.4.2.9.3 1.5.3 1.1 0 1.8-.5 1.8-1.3 0-1-1.3-1.1-1.3-1.6 0-.2.2-.4.7-.4.3 0 .6.1.9.2l.2-.8zm6 3.5h-1.3c-.1 0-.2-.1-.2-.2l-1-4.9H17l-1.1 5.1h-1.4l1.9-5.1h1.2c.2 0 .4.1.4.3zm-5.1-5.1h-1.3l-1.8 5.1H12l.3-.9h1.9l.2.9h1.3zm-1 3.2.5-1.4.3 1.4z"/></svg>',
         'mastercard' => '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="6" fill="#eb001b"/><circle cx="15" cy="12" r="6" fill="#f79e1b"/><path fill="#ff5f00" d="M12 6a6 6 0 0 0 0 12a6 6 0 0 0 0-12z"/></svg>',
@@ -39,9 +41,11 @@
 
 <div class="filters" style="margin-bottom:28px;justify-content:center;">
     <span class="filter-label">{{ __('ui.home.filter_label') }}</span>
-    <a class="filter-pill" href="{{ route('home') }}">
-        <span {{ $filterSlug ? '' : 'style=background:#f8fafc;color:#0a2a4a;' }}>{{ __('ui.home.filter_all') }}</span>
-    </a>
+    @if($showAllFilter)
+        <a class="filter-pill" href="{{ route('home') }}">
+            <span {{ $filterSlug ? '' : 'style=background:#f8fafc;color:#0a2a4a;' }}>{{ $allFilterLabel }}</span>
+        </a>
+    @endif
     @foreach($options as $option)
         @php
             $isActive = $filterSlug === $option->slug;

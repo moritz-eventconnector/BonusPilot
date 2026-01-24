@@ -35,9 +35,17 @@
     @if($options->isEmpty())
         <p class="admin-muted">{{ __('ui.filters.empty') }}</p>
     @else
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
+        <p class="admin-muted">{{ __('ui.filters.reorder_hint') }}</p>
+        <div class="grid filter-options-list" data-reorder-url="{{ route('admin.filters.reorder') }}" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
             @foreach($options as $option)
-                <div class="card" style="margin-bottom:0;">
+                <div class="card filter-option-card" style="margin-bottom:0;" data-option-id="{{ $option->id }}">
+                    <div class="admin-inline" style="justify-content:space-between;margin-bottom:10px;">
+                        <strong>{{ $option->name }}</strong>
+                        <div class="admin-inline" style="gap:6px;">
+                            <button class="btn btn-secondary btn-icon" type="button" data-move="up" aria-label="{{ __('ui.filters.actions.move_up') }}">↑</button>
+                            <button class="btn btn-secondary btn-icon" type="button" data-move="down" aria-label="{{ __('ui.filters.actions.move_down') }}">↓</button>
+                        </div>
+                    </div>
                     <form method="POST" action="{{ route('admin.filters.options.update', $option) }}">
                         @csrf
                         @method('PATCH')
@@ -62,4 +70,47 @@
         </div>
     @endif
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const list = document.querySelector('.filter-options-list');
+        if (!list) {
+            return;
+        }
+
+        const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        const sendOrder = () => {
+            const order = Array.from(list.querySelectorAll('.filter-option-card')).map((card) =>
+                Number(card.dataset.optionId)
+            );
+            fetch(list.dataset.reorderUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf,
+                },
+                body: JSON.stringify({ order }),
+            });
+        };
+
+        list.addEventListener('click', (event) => {
+            const button = event.target.closest('[data-move]');
+            if (!button) {
+                return;
+            }
+            const card = button.closest('.filter-option-card');
+            if (!card) {
+                return;
+            }
+            if (button.dataset.move === 'up' && card.previousElementSibling) {
+                list.insertBefore(card, card.previousElementSibling);
+                sendOrder();
+            }
+            if (button.dataset.move === 'down' && card.nextElementSibling) {
+                list.insertBefore(card.nextElementSibling, card);
+                sendOrder();
+            }
+        });
+    });
+</script>
 @endsection
