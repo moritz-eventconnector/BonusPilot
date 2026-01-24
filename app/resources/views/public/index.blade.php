@@ -226,5 +226,18 @@
 
     window.addEventListener('load', updateCardHeights);
     window.addEventListener('resize', updateCardHeights);
+    document.addEventListener('DOMContentLoaded', updateCardHeights);
+
+    const logoImages = document.querySelectorAll('.bonus-logo');
+    logoImages.forEach((img) => {
+        if (img.complete) return;
+        img.addEventListener('load', updateCardHeights);
+        img.addEventListener('error', updateCardHeights);
+    });
+
+    requestAnimationFrame(() => {
+        updateCardHeights();
+        setTimeout(updateCardHeights, 120);
+    });
 </script>
 @endsection
