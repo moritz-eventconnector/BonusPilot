@@ -406,6 +406,8 @@
             min-height: 200px;
             transform-style: preserve-3d;
             transition: transform 0.4s ease;
+            will-change: transform;
+            transform: translateZ(0);
         }
         .flip-card.is-flipped .flip-card-inner {
             transform: rotateY(180deg);
@@ -423,6 +425,7 @@
             justify-content: space-between;
             box-shadow: 0 10px 24px rgba(2,16,32,0.3);
             overflow: hidden;
+            transform: translateZ(0);
         }
         .flip-card-front {
             justify-content: center;
