@@ -21,21 +21,45 @@ class RestoreDatabase extends Command
             return self::FAILURE;
         }
 
-        $config = config('database.connections.pgsql');
-        $env = [
-            'PGPASSWORD' => $config['password'] ?? '',
-        ];
+        $driver = config('database.default');
+        $config = config("database.connections.{$driver}");
 
-        $result = Process::timeout(1200)
-            ->env($env)
-            ->run([
-                'psql',
-                '-h', $config['host'],
-                '-p', (string) $config['port'],
-                '-U', $config['username'],
-                '-d', $config['database'],
-                '-f', $path,
-            ]);
+        if ($driver === 'pgsql') {
+            $env = [
+                'PGPASSWORD' => $config['password'] ?? '',
+            ];
+
+            $result = Process::timeout(1200)
+                ->env($env)
+                ->run([
+                    'psql',
+                    '-h', $config['host'],
+                    '-p', (string) $config['port'],
+                    '-U', $config['username'],
+                    '-d', $config['database'],
+                    '-f', $path,
+                ]);
+        } elseif ($driver === 'mysql') {
+            $env = [
+                'MYSQL_PWD' => $config['password'] ?? '',
+            ];
+
+            $result = Process::timeout(1200)
+                ->env($env)
+                ->run(
+                    [
+                        'mysql',
+                        '-h', $config['host'],
+                        '-P', (string) $config['port'],
+                        '-u', $config['username'],
+                        $config['database'],
+                    ],
+                    file_get_contents($path)
+                );
+        } else {
+            $this->error("Unsupported database driver: {$driver}");
+            return self::FAILURE;
+        }
 
         if (! $result->successful()) {
             $this->error($result->errorOutput());
